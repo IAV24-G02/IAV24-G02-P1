@@ -16,19 +16,19 @@ public class AnimadorAvatar: MonoBehaviour
 {
 
     Animator animator;
-    Rigidbody rigidbody;
+    Rigidbody myRigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        rigidbody = GetComponent<Rigidbody>();
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(rigidbody.velocity.magnitude >= 0)
-            animator.SetInteger("speed", (int)rigidbody.velocity.magnitude);
+        if(myRigidbody.velocity.magnitude >= 0)
+            animator.SetInteger("speed", (int)myRigidbody.velocity.magnitude);
     }
 }
