@@ -117,7 +117,11 @@ namespace UCM.IAV.Movimiento {
             // Descomentar estas líneas si queremos ignorar los valores iniciales de velocidad y rotación
             //velocidad = Vector3.zero; 
             //rotacion = 0.0f
+            //Crea una instancia de direccióncon la que corregir el movimiento dinámicamente, mediante aceleraciones.
             direccion = new Direccion();
+            //Crea una instancia de una estructura de datos que almacena pares clave-valor, lo que significa que puedes asociar un valor con una clave.
+            //El diccionario que se está creando tiene claves enteras (int) y valores que son listas de objetos de tipo Direccion.
+            //La lista List<Direccion> permite almacenar múltiples elementos de tipo Direccion.
             grupos = new Dictionary<int, List<Direccion>>();
 
             cuerpoRigido = GetComponent<Rigidbody>();
@@ -129,6 +133,7 @@ namespace UCM.IAV.Movimiento {
         /// </summary>
         public virtual void FixedUpdate()
         {
+            //Comprueba si el RigidBody es cinemático para ignorar el fixed update.
             if (cuerpoRigido.isKinematic)
                 return; // El movimiento será cinemático, fotograma a fotograma con Update
 
@@ -192,6 +197,7 @@ namespace UCM.IAV.Movimiento {
             else if (orientacion > 360.0f)
                 orientacion -= 360.0f;
 
+            //Va cambiando la orientación del agente tick a tick para que el cambio de mirada no sea brusco.
             LookDirection();
 
             // Elimino la rotación totalmente, dejándolo en el estado inicial, antes de rotar el objeto lo que nos marque la variable orientación
@@ -315,6 +321,7 @@ namespace UCM.IAV.Movimiento {
             return vector.normalized;
         }
 
+        //Actualiza la dirección en la que está mirando la un agente.
         private void LookDirection()
         {
             if (direccion.lineal.x != 0 || direccion.lineal.z != 0)
