@@ -1,4 +1,4 @@
-# IAV - Base para la Práctica 1
+# IAV - Práctica 1
 
 ## Autores
 - Yi (Laura) Wang Qiu (LauraWangQiu)
@@ -9,18 +9,54 @@
 ## Propuesta
 Este proyecto es una práctica de la asignatura de Inteligencia Artificial para Videojuegos del Grado en Desarrollo de Videojuegos de la UCM, cuyo enunciado original es este: [Plaga de Ratas](https://narratech.com/es/inteligencia-artificial-para-videojuegos/percepcion-y-movimiento/plaga-de-ratas/).
 
-Esta práctica consiste en... 
-(Explicación breve de que el avatar del jugador será el **flautista**, que hay **ratas** con un cierto comportamiento, etc.)
+Esta práctica consiste en recrear los comportamientos de una serie de personajes en una escena con obstáculos:
+
+- Flautista: será nuestro _player_ al que controlaremos mediante el teclado y ratón. Se podrá mover por toda la escena sin atravesar los obstáculos y podrá tocar la flauta y dejar de hacerlo.
+
+- Perro: fiel compañero del flautista. Perseguirá al flautista con cierto control de llegada siempre y cuando no haya ratas cerca, en ese caso, huye y deja de perseguir al flautista.
+
+- Ratas: se mueven erráticamente por la escena siempre y cuando el flautista no toque su flauta, en ese caso, las ratas empiezan a perseguir al flautista con cierto control de llegada entre ellas y con el flautista y puede producir que el perro huya.
+
 
 ## Punto de partida
+
 Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profesor y disponible en este repositorio: [IAV-Movimiento](https://github.com/Narratech/IAV-Movimiento)
 
-Consiste en... 
-(Explicación detallada de las clases y los métodos ya implementados)
+| Clases | Información |
+| - | - |
+| ANIMACIONES | |
+| Animador Animal | |
+| Animador Avatar | |
+| Seguimiento Camara | |
+| COMPORTAMIENTOS | |
+| Control Jugador | |
+| Huir | |
+| Llegada | |
+| Merodear | |
+| Separación | |
+| Tocar Flauta | |
+| GENERALES | |
+| Agente | |
+| Comportamiento Agente | | 
+| Direccion | |
+| Gestor Juego | |
 
 ## Diseño de la solución
 
 Lo que vamos a realizar para resolver esta práctica es...
+
+(MODIFICAR LO SIGUIENTE)
+
+A.
+
+B.
+
+C.
+
+D.
+
+E.
+
 
 El pseudocódigo del algoritmo de llegada utilizado es:
 ```
@@ -78,49 +114,42 @@ class Arrive:
 
 El pseudocódigo del algoritmo de movimiento de huida es...
 
-También es posible mostrar diagramas...
-
-![diagram](./Docs/diagrama.png)
-
-Mejor que insertando imágenes, se puede usar Mermaid:
-
-```mermaid
-stateDiagram
-    [*] --> Inicio
-    Inicio --> Juego : Pulsar 'Jugar'
-    Juego --> Muerte : Tocado por el Enemigo
-    Juego --> Victoria : Coger el Ladrillo Dorado
-    Muerte --> Inicio
-    Victoria --> Inicio
-```
-
-Para dibujar espacios de coordenadas 2D con puntos y vectores, se podría incrustar una imagen de Google Draw, o intentar incrustarlo en el repositorio también con Mermaid. 
 
 ## Pruebas y métricas
 
-Plan de pruebas dividido por características (C1, C2 y C3 serían las 3 pruebas que se han realizado de la característica C)
-- [Vídeo con la batería de pruebas](https://youtu.be/xxxxx)
+- Característica A: link no disponible
+- Característica B: link no disponible
+- Característica C: link no disponible
+- Característica D: link no disponible
+- Característica E: link no disponible
 
 ## Ampliaciones
 
 Se han realizado las siguientes ampliaciones
 
-- Los obstáculos del escenario se colocan...
+- 
 
 ## Producción
 
-Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. Esto se podrá documentar en una tabla como esta o usando la [pestaña de Proyectos](https://github.com/orgs/Narratech/projects/4/views/1) de GitHub.
+Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. Observa la tabla de abajo para ver el estado y las fechas de realización de las mismas. Puedes visitar nuestro proyecto de GitHub en el siguiente [link](https://github.com/orgs/IAV24-G02/projects/1).
+
 
 | Estado  |  Tarea  |  Fecha  |  
 |:-:|:--|:-:|
-| ✔ | Diseño: Primer borrador | 2-12-2022 |
-| ✔ | Característica A: Nosequé | 11-12-2022 |
-| ✔ | Característica B: Nosecuentos| 12-12-2022 |
-|   | ... | |
-|  | OPCIONAL |  |
-| ✔ | Generador pseudoaleatorio | 3-12-2022 |
-| :x: | Menú | 3-12-2022 |
-| :x: | HUD | 12-12-2022 |
+|  | Diseño: Primer borrador | ..-..-2024 |
+|  | Característica A | ..-..-2024 |
+|  | Característica B | ..-..-2024 |
+|  | Característica C | ..-..-2024 |
+|  | Característica D | ..-..-2024 |
+|  | Característica E | ..-..-2024 |
+|  |  OPCIONALES  | |
+|  | Generador pseudoaleatorio | ..-..-2024 |
+|  | Competición de flautistas | ..-..-2024 |
+|  | Distracción de las ratas con trozos de queso | ..-..-2024 |
+|  | Percepción del perro mediante la vista | ..-..-2024 |
+|  | Evasión de los obstáculos mediante la vista | ..-..-2024 |
+|  | Menú | ..-..-2024 |
+|  | HUD | ..-..-2024 |
 
 ## Referencias
 
