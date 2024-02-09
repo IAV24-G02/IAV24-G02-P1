@@ -25,9 +25,9 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 | Clases | Información |
 | - | - |
 | ANIMACIONES | |
-| Animador Animal | |
-| Animador Avatar | |
-| Seguimiento Camara | |
+| Animador Animal | Establece un booleano de movimiento si se está moviendo o no dependiendo de la velocidad del rigidbody y de un _threshold_ al componente de Animator para que se reproduzca la animación que le corresponda. |
+| Animador Avatar | Asigna el valor de la velocidad del rigidbody de la entidad al componente de Animator para que se reproduzca la animación que le corresponda.  |
+| Seguimiento Camara | Calcula la posición interpolada entre el _target_ (el _player_) y la propia entidad (la cámara) con cierta velocidad de suavizado y cierto _offset_ para producir un comportamiento de seguimiento. |
 | COMPORTAMIENTOS | |
 | Control Jugador | |
 | Huir | |
