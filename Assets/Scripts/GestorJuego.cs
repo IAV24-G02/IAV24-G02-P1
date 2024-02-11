@@ -3,13 +3,13 @@
    http://www.federicopeinado.com
 
    Este fichero forma parte del material de la asignatura Inteligencia Artificial para Videojuegos.
-   Esta asignatura se imparte en la Facultad de Inform�tica de la Universidad Complutense de Madrid (Espa�a).
+   Esta asignatura se imparte en la Facultad de Inform�tica de la Universidad Complutense de Madrid (Espa�a).
 
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +32,8 @@ namespace UCM.IAV.Movimiento
         Text fRText;   
         [SerializeField]
         Text ratText;
+        [SerializeField]
+        TMP_InputField input;
 
         private GameObject rataGO = null;
         private int frameRate = 60;
@@ -70,7 +72,7 @@ namespace UCM.IAV.Movimiento
         }
 
         // Delegado para hacer cosas cuando una escena termina de cargar (no necesariamente cuando ha cambiado/switched)
-        // Antiguamente se usaba un m�todo del SceneManager llamado OnLevelWasLoaded(int level), ahora obsoleto
+        // Antiguamente se usaba un m�todo del SceneManager llamado OnLevelWasLoaded(int level), ahora obsoleto
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             rataGO = GameObject.Find("Ratas");
@@ -78,7 +80,6 @@ namespace UCM.IAV.Movimiento
             fRText = GameObject.Find("Framerate").GetComponent<Text>();
             numRats = rataGO.transform.childCount;
             ratText.text = numRats.ToString();
-
         }
 
         // Se llama para poner en marcha el gestor
@@ -129,7 +130,9 @@ namespace UCM.IAV.Movimiento
                 ChangeFrameRate();
             if (Input.GetKeyDown(KeyCode.N))
                 ChangeCameraView();
-
+            if (Input.GetKeyDown(KeyCode.Return) || 
+                Input.GetKeyDown(KeyCode.KeypadEnter))
+                EnterInput();
         }
 
         private void Restart()
@@ -193,6 +196,56 @@ namespace UCM.IAV.Movimiento
             else{
                 Camera.main.GetComponent<SeguimientoCamara>().offset = new Vector3(0, 7, -10);
                 cameraPerspective = true;
+            }
+        }
+        
+        private void DespawnRatas(int quantity)
+        {
+            if (rataGO == null || rataGO.transform.childCount < 1)
+                return;
+
+            // Recolectar referencias de objetos a destruir.
+            List<GameObject> toDestroy = new List<GameObject>();
+            for (int i = 0; i < quantity && i < rataGO.transform.childCount; i++)
+            {
+                toDestroy.Add(rataGO.transform.GetChild(i).gameObject);
+            }
+
+            // Destruir los objetos recolectados.
+            foreach (var obj in toDestroy)
+            {
+                Destroy(obj);
+            }
+
+            numRats -= quantity;
+            ratText.text = numRats.ToString();
+        }
+
+        public void EnterInput()
+        {
+            // Comprueba de que se trate un número válido
+            int inputRats;
+            bool isValid = int.TryParse(input.text, out inputRats);
+            if (isValid && inputRats >= 0)
+            {
+                Debug.Log("Número válido: " + inputRats);
+
+                int difference = Mathf.Abs(numRats - inputRats);
+                if (inputRats > numRats)
+                {
+                    for (int i = 0; i < difference; ++i)
+                    {
+                        SpawnRata();
+                    }
+                }
+                else if (inputRats < numRats)
+                {
+                    DespawnRatas(difference);
+                }
+            }
+            else
+            {
+                Debug.Log("Por favor, ingresa un número válido.");
             }
         }
     }
