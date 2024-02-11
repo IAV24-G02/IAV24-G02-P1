@@ -45,75 +45,160 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 
 Lo que vamos a realizar para resolver esta práctica es...
 
-(MODIFICAR LO SIGUIENTE)
+A. Modificar el input de tocar la flauta para que se realice con el `clic derecho` e implementar una `caja de texto` y un `botón` para poder introducir un número de ratas específico.
 
-A.
+B. [NACHO]
 
-B.
+C. Implementar el movimiento del perro para la huida causado por la cercanía de las ratas respecto al perro.
 
-C.
+La situación es la que se muestra en la siguiente imagen:
 
-D.
+![Figure 3.34: A stable equilibrium](images/C.png)
 
-E.
+El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el player. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: persecución y huida con prioridad del de huida frente al de persecución.
 
-
-El pseudocódigo del algoritmo de llegada utilizado es:
+El pseudocódigo del algoritmo de huida sería muy parecido al de persecución pero intercambiando la posición del target con el de la propia entidad. Aún así, en este caso hablamos de huir de un grupo de ratas y no de huir de solo un target por lo que habría que modificar algo más:
 ```
-class Arrive:
-    character: Kinematic
-    target: Kinematic
+class Static:
+    position: Vector
+    orientation: float
 
-    maxAcceleration: float
+class KinematicSteeringOutput:
+    velocity: Vector
+    rotation: float
+
+class FleeFromAGroup:
+    character: Static
+    # List of targets.
+    target: Static[]
+
     maxSpeed: float
 
-    # The radius for arriving at the target.
-    targetRadius: float
+    function newOrientation(current: float, velocity: Vector) -> float:
+        # Make sure we have a velocity.
+        if velocity.length() > 0:
+            # Calculate orientation from the velocity.
+            return atan2(-static.x, -static.z)
 
-    # The radius for beginning to slow down.
-    slowRadius: float
+        # Otherwise use the current orientation
+        else:
+            return current
 
-    # The time over which to achieve target speed.
-    timeToTarget: float = 0.1
+
+    function getSteering() -> KinematicSteeringOutput:
+        result = new KinematicSteeringOutput()
+
+        # Calculate the average point of all targets.
+        averagePosition = new Vector()
+        for target in targets:
+            averagePosition += target.position
+        averagePosition /= len(targets)
+
+        # Obtain the direction to move away from the average point of the targets.
+        result.velocity = character.position - averagePosition
+
+        # The velocity is along this direction, at full speed.
+        result.velocity.normalize()
+        result.velocity *= maxSpeed
+
+        # Face in the direction we want to move.
+        character.orientation = newOrientation(
+                character.orientation,
+                result.velocity)
+            
+        result.rotation = 0
+        return result
+```
+
+Se podría modificar un poco más haciendo que solo compruebe dentro de un radio respecto al character (perro) en vez de con todos los targets que estén en la escena:
+
+```
+# Radius or range with respect to the character
+fleeRange: float
+
+for target in targets:
+    if (character.position - target.position).length() <= fleeRange:
+        averagePosition += target.position
+```
+
+Luego, contando con el comportamiento de persecución del apartado anterior, necesitaremos el siguiente pseudocódigo para combinarlos y priorizar el comportamiento de huida:
+```
+class SteeringOutput:
+    linear: Vector
+    angular: float
+
+class BlendedSteering:
+    class BehaviourAndWeight:
+        behavior: SteeringBehaviour
+        weight: float
+
+    behaviors: BehaviourAndWeight[]
+
+    # The overall maximum acceleration and rotation.
+    maxAcceleration: float
+    maxRotation: float
 
     function getSteering() -> SteeringOutput:
         result = new SteeringOutput()
 
-        # Get the direction to the target.
-        direction = target.position - character.position
-        distance = direction.length()
-
-        # Check if we are there, return no steering.
-        if distance < targetRadius:
-            return null
-
-        # If we are outside the slowRadius, then move at max speed.
-        if distance > slowRadius:
-            targetSpeed = maxSpeed
-        # Otherwise calculate a scaled speed.
-        else:
-            targetSpeed = maxSpeed * distance / slowRadius
-
-        # The target velocity combines speed and direction.
-         targetVelocity = direction
-        targetVelocity.normalize()
-        targetVelocity *= targetSpeed
-
-        # Acceleration tries to get to the target velocity.
-        result.linear = targetVelocity - character.velocity
-        result.linear /= timeToTarget
-
-        # Check if the acceleration is too fast.
-        if result.linear.length() > maxAcceleration:
-            result.linear.normalize()
-            result.linear *= maxAcceleration
-
-        result.angular = 0
+        # Accumulate all accelerations.
+        for b in behaviors:
+            result += b.weight * b.behavior.getSteering()
+        
+        # Crop the result and return.
+        result.linear = max(result.linear, maxAcceleration)
+        result.angular = max(result.angular, maxRotation)
         return result
 ```
 
-El pseudocódigo del algoritmo de movimiento de huida es...
+- `SteeringOutput`: estructura o clase que almacena la aceleración lineal y angular resultante.
 
+- `BlendedSteering`: clase que se encarga de combinar múltiples SteeringBehaviours con diferentes pesos para crear un comportamiento compuesto más complejo y versátil.
+    - Contiene la clase `BehaviourAndWeight` que asocia un SteeringBehaviour (un comportamiento de dirección individual) con un weight (peso). El peso es el que determina cuánto influirá este comportamiento en el comportamiento final compuesto.
+    - Propiedades:
+        - _behaviors_: lista de instancias de BehaviourAndWeight, representando los diferentes comportamientos de dirección y sus pesos asociados que se combinarán.
+        - _maxAcceleration_ y _maxRotation_: aceleraciones lineal y angular máximas que la entidad puede alcanzar, respectivamente. Estos valores se utilizan para limitar el resultado de la mezcla de comportamientos para asegurar que no sobrepasen las capacidades físicas de la entidad.
+        - Método _getSteering()_: calcula y devuelve el resultado compuesto de todos los comportamientos de dirección mezclados. Inicia creando un nuevo SteeringOutput. Luego, itera sobre cada BehaviourAndWeight en la lista behaviors, acumulando las aceleraciones ponderadas de cada comportamiento en result. Después de sumar todas las aceleraciones, el método ajusta para que no superen maxAcceleration y maxRotation. Finalmente, devuelve result, que ahora contiene la aceleración combinada que debe aplicarse a la entidad.
+
+Para comprobar si hay una diferencia de aceleración significativa en la combinación de comportamientos, se usaría el siguiente pseudocódigo:
+
+```
+# Should be a small value, effectively zero.
+epsilon: float
+
+class PrioritySteering:
+    # Holds a list of BlendedSteering instances, which in turn
+    # contain sets of behaviors with their blending weights.
+    groups: BlendedSteering[]
+
+    function getSteering() -> SteeringOutput:
+        for group in groups:
+            # Create the steering structure for accumulation.
+            steering = group.getSteering()
+
+            # Check if we're above the threshold, if so return.
+            if steering.linear.length() > epsilon or
+               abs(steering.angular) > epsilon:
+                return steering
+
+        # If we get here, it means that no group had a large enough
+        # acceleration, so return the small acceleration from the
+        # final group.
+        return steering
+```
+
+- _epsilon_: constante que se utiliza para determinar si una aceleración (tanto lineal como angular) es efectivamente cero, es decir, lo suficientemente pequeña como para ser considerada insignificante.
+
+- `PrioritySteering`: 
+    - _groups_: lista de instancias de BlendedSteering. Cada BlendedSteering representa un grupo de comportamientos de dirección mezclados con sus respectivos pesos. Los grupos están ordenados por prioridad, de modo que el sistema evalúa cada grupo en orden hasta encontrar uno que produzca una aceleración significativa.
+    - Método _getSteering()_: itera a través de cada grupo de BlendedSteering en groups, evaluando los comportamientos mezclados en cada grupo para determinar si producen una aceleración significativa.
+    Para cada grupo, se llama al método getSteering() del BlendedSteering para obtener la aceleración resultante de mezclar sus comportamientos.
+    Luego se verifica si la magnitud de la aceleración lineal del resultado o si el valor absoluto de la aceleración angular son mayores que epsilon. Si alguna de estas condiciones se cumple, significa que el grupo actual produce una aceleración suficientemente significativa, y el método devuelve inmediatamente este resultado de aceleración.
+    Si se itera a través de todos los grupos sin encontrar una aceleración significativa, el método devuelve la aceleración del último grupo evaluado, aunque esta sea pequeña.
+
+D. [ALFONSO]
+
+E. [AGUSTÍN]
 
 ## Pruebas y métricas
 
@@ -137,11 +222,14 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 | Estado  |  Tarea  |  Fecha  |  
 |:-:|:--|:-:|
 |  | Diseño: Primer borrador | ..-..-2024 |
-|  | Característica A | ..-..-2024 |
+| ✔ | Característica A: Tocar flauta con el clic derecho | 01-02-2024 |
+|  | Característica A: Introducir número de ratas específico | ..-..-2024 |
 |  | Característica B | ..-..-2024 |
 |  | Característica C | ..-..-2024 |
 |  | Característica D | ..-..-2024 |
 |  | Característica E | ..-..-2024 |
+|  |  OTROS  | |
+|  | Movimiento del avatar con el clic izquierdo | ..-..-2024 |
 |  |  OPCIONALES  | |
 |  | Generador pseudoaleatorio | ..-..-2024 |
 |  | Competición de flautistas | ..-..-2024 |
