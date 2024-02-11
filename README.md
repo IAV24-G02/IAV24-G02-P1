@@ -32,9 +32,9 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 | Control Jugador | |
 | Huir | |
 | Llegada | |
-| Merodear | |
-| Separación | |
-| Tocar Flauta | |
+| Merodear | Componente que hará que las ratas deambulen mientras no se toque la flauta. Tiene variables para los tiempos y direcciones utilizadas para las orientaciones. |
+| Separación | Se encargará de que las entidades no se solapen cuando sigan a otra entidad. Establece valores para los targets, el umbral de activación y el coeficiente de repulsión.  |
+| Tocar Flauta | Se encarga de gestionar las acciones cuando se toca o no la flauta. Si pulsamos clic derecho activamos la flauta y con ello los efectos audiovisuales de la misma, además de activar los comportamientos de Separación y Llegada de las ratas. Si dejamos de clicar se desactiva todo lo anterior y empieza el Merodeo de las Ratas. |
 | GENERALES | |
 | Agente | |
 | Comportamiento Agente | | 
