@@ -151,25 +151,39 @@ namespace UCM.IAV.Movimiento
                 scenario.SetActive(true);
         }
 
-        private void SpawnRata()
+        private void SpawnRata(int quantity = 1)
         {
             if (rataPrefab == null || rataGO == null)
                 return;
 
-            Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
+            for (int i = 0; i < quantity; ++i)
+            {
+                Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
+            }
 
-            numRats++;
+            numRats += quantity;
             ratText.text = numRats.ToString();
         }
 
-        private void DespawnRata()
+        private void DespawnRata(int quantity = 1)
         {
             if (rataGO == null || rataGO.transform.childCount < 1)
                 return;
 
-            Destroy(rataGO.transform.GetChild(0).gameObject);
+            // Recolectar referencias de objetos a destruir.
+            List<GameObject> toDestroy = new List<GameObject>();
+            for (int i = 0; i < quantity && i < rataGO.transform.childCount; i++)
+            {
+                toDestroy.Add(rataGO.transform.GetChild(i).gameObject);
+            }
 
-            numRats--;
+            // Destruir los objetos recolectados.
+            foreach (var obj in toDestroy)
+            {
+                Destroy(obj);
+            }
+
+            numRats -= quantity;
             ratText.text = numRats.ToString();
         }
 
@@ -198,28 +212,6 @@ namespace UCM.IAV.Movimiento
                 cameraPerspective = true;
             }
         }
-        
-        private void DespawnRatas(int quantity)
-        {
-            if (rataGO == null || rataGO.transform.childCount < 1)
-                return;
-
-            // Recolectar referencias de objetos a destruir.
-            List<GameObject> toDestroy = new List<GameObject>();
-            for (int i = 0; i < quantity && i < rataGO.transform.childCount; i++)
-            {
-                toDestroy.Add(rataGO.transform.GetChild(i).gameObject);
-            }
-
-            // Destruir los objetos recolectados.
-            foreach (var obj in toDestroy)
-            {
-                Destroy(obj);
-            }
-
-            numRats -= quantity;
-            ratText.text = numRats.ToString();
-        }
 
         public void EnterInput()
         {
@@ -233,14 +225,11 @@ namespace UCM.IAV.Movimiento
                 int difference = Mathf.Abs(numRats - inputRats);
                 if (inputRats > numRats)
                 {
-                    for (int i = 0; i < difference; ++i)
-                    {
-                        SpawnRata();
-                    }
+                    SpawnRata(difference);
                 }
                 else if (inputRats < numRats)
                 {
-                    DespawnRatas(difference);
+                    DespawnRata(difference);
                 }
             }
             else
