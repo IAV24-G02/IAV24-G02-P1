@@ -198,7 +198,46 @@ class PrioritySteering:
 
 D. [ALFONSO]
 
-E. [AGUSTÍN]
+E. Cuando el flautista toca la flauta, se produce el desplazamiento en bandada (hipnosis) de las ratas, con movimiento dinámico en formación (seguimiento, cohesión y separación) y control de llegada hasta las proximidades del flautista. Las ratas encaran al flautista si toca la flauta.
+
+El pseudocódigo utilizado para los comportamientos de Llegada y Seguimiento del Perro serán reutilizados para las Ratas. En adición a estos comportamientos añadiremos uno de Separación:
+
+```
+class Separacion:
+	character: Kinematic
+ 	maxAcceleration: float
+
+ 	# A list of potential targets.
+ 	targets: Kinematic[]
+
+ 	# The threshold to take action.
+ 	threshold: float
+
+ 	# The constant coefficient of decay for the inverse square law.
+ 	decayCoefficient: float
+
+ 	function getSteering()-> SteeringOutput:
+ 		result = new SteeringOutput()
+ 		# Loop through each target.
+ 		for target in targets:
+ 			# Check if the target is close.
+ 			direction = target.position- character.position
+ 			distance = direction.length()
+			if distance < threshold:
+ 				# Calculate the strength of repulsion
+ 				# (here using the inverse square law).
+ 				strength = min(
+ 					decayCoefficient / (distance * distance),
+ 					maxAcceleration)
+
+ 				# Add the acceleration.
+ 				direction.normalize()
+ 				result.linear += strength * direction
+ 		return result
+```
+
+Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actua una especie de fuerza de repulsión.
+
 
 ## Pruebas y métricas
 
