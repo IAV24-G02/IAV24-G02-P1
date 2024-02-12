@@ -1,12 +1,12 @@
 /*    
-   Copyright (C) 2020-2023 Federico Peinado
-   http://www.federicopeinado.com
+   Copyright (C) 2024 Ignacio Ligero
+   http://www.github.com/theligero
 
    Este fichero forma parte del material de la asignatura Inteligencia Artificial para Videojuegos.
    Esta asignatura se imparte en la Facultad de Informática de la Universidad Complutense de Madrid (España).
 
-   Autor: Federico Peinado 
-   Contacto: email@federicopeinado.com
+   Autor: Ignacio Ligero
+   Contacto: iligero@ucm.es
 */
 using UnityEngine;
 
@@ -17,30 +17,71 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Llegada : ComportamientoAgente
     {
+        public float distancia = 7;
+
+        public float acelMaxima;
+        public float velMaxima;
+
+        // El radio para llegar al objetivo
+        private float rObjetivo;
+
+        // El radio en el que se empieza a ralentizarse
+        private float rRalentizado;
+
+        // El tiempo en el que conseguir la aceleracion objetivo
+        private float timeToTarget = 0.1f;
+
+        // El RigidBody del objetivo
+        private Rigidbody rbObjetivo;
+
+        public void Start()
+        {
+            rbObjetivo = objetivo.GetComponent<Rigidbody>();
+        }
+
         /// <summary>
         /// Obtiene la dirección
         /// </summary>
         /// <returns></returns>
-
-
-        // El radio para llegar al objetivo
-        public float rObjetivo;
-
-        // El radio en el que se empieza a ralentizarse
-        public float rRalentizado;
-
-        public float fRalentizado;
-
-        public int distancia = 7;
-
-        // El tiempo en el que conseguir la aceleracion objetivo
-        float timeToTarget = 0.1f;
         public override Direccion GetDireccion()
         {
-            // IMPLEMENTAR llegada
-            return new Direccion();
+            // Consigue la dirección hacia el objetivo
+            Vector3 direccion = new Vector3();
+            direccion = objetivo.transform.position - transform.position;
+            distancia = direccion.magnitude;
+            float velObjetivo;
+
+            // Comprueba si ya ha llegado
+            if (distancia < rObjetivo)
+                return null; // en tal caso devuelve nulo
+
+            // Si estamos fuera del rRalentizado
+            if (distancia > rRalentizado)
+                velObjetivo = velMaxima; // entonces se mueve a velocidad máxima
+            // En otro caso calcula la velocidad en escala
+            else
+                velObjetivo = velMaxima * distancia / rRalentizado;
+
+            // La velocidad objetivo combina velocidad y dirección
+            Vector3 vObjetivo = new Vector3();
+            vObjetivo = direccion;
+            vObjetivo.Normalize();
+            vObjetivo *= velObjetivo;
+
+            // La aceleración intenta conseguir la velocidad objetivo
+            Direccion sol = new Direccion();
+            sol.lineal = vObjetivo + rbObjetivo.velocity;
+            sol.lineal /= timeToTarget;
+
+            // Comprueba si la aceleración es demasiado alta
+            if (sol.lineal.magnitude > acelMaxima)
+            {
+                sol.lineal.Normalize();
+                sol.lineal *= acelMaxima;
+            }
+
+            sol.angular = 0;
+            return sol;
         }
-
-
     }
 }
