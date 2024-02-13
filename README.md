@@ -241,11 +241,20 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 
 ## Pruebas y métricas
 
-- Característica A: link no disponible
-- Característica B: link no disponible
-- Característica C: link no disponible
-- Característica D: link no disponible
-- Característica E: link no disponible
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
+| **Característica A** | | |
+| Probar que el _player_ toque la flauta con el clic derecho | Clic derecho, ver que se reproduce música y sale un radio | _link no disponible_ |
+| Probar que al introducir un número N de ratas en la caja de texto se produzca en la escena | Introducimos valores no númericos (a, ?, ...), valores numéricos negativos (-1, -1000), valores numéricos cualesquiera en la caja de texto y ENTER | _link no disponible_ |
+| Sin obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
+| Con obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
+| **Característica B** | | |
+| **Característica C** | | |
+| Probar que cambia de comportamiento de persecución al de huida | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) | _link no disponible_ |
+| Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al _player_ | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
+| Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
+| **Característica D** | | |
+| **Característica E** | | |
 
 ## Ampliaciones
 
