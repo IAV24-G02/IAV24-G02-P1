@@ -2146,6 +2146,25 @@ MonoBehaviour:
   distancia: 7
   acelMaxima: 8
   velMaxima: 2
+--- !u!114 &774483606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774483602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1fd1036b200c341a7549fe5c2119d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 919132148976998258}
+  maxAcceleration: 5
+  targEmpty: {fileID: 870761176}
+  umbral: 15
+  decayCoefficient: 25
 --- !u!4 &810378525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1311526244833818872, guid: d484baec5db0a944e81bc9394647fb15,
@@ -4840,7 +4859,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rata
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -317693632321659350, guid: 5175d5736886518439bf9a2956a122b4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5709,6 +5729,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3861295050334874256, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
       insertIndex: 3
+      addedObject: {fileID: 774483606}
+    - targetCorrespondingSourceObject: {fileID: 3861295050334874256, guid: 5ff744207c6a5044ab297c8fc4814fc0,
+        type: 3}
+      insertIndex: 4
       addedObject: {fileID: 774483604}
   m_SourcePrefab: {fileID: 100100000, guid: 5ff744207c6a5044ab297c8fc4814fc0, type: 3}
 --- !u!23 &6021100666521978446

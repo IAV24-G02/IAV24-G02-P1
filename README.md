@@ -47,7 +47,68 @@ Lo que vamos a realizar para resolver esta práctica es...
 
 A. Modificar el input de tocar la flauta para que se realice con el `clic derecho` e implementar una `caja de texto` y un `botón` para poder introducir un número de ratas específico.
 
-B. [NACHO]
+B. Para empezar a programar el acompañamiento del perro al flautista, primero será necesario conocer tanto el funcionamiento del algoritmo empleado como su representación visual final.
+
+En primer lugar, el objetivo del algoritmo de llegada será ralentizarse para que llegue a la ubicación exacta.
+
+![Figure 3.9: Arriving](images/arrive_diagram.png)
+
+Dicho algoritmo utiliza dos radios: uno de llegada, que permite al personaje acercarse lo suficiente al objetivo sin importar el margen de error, y otro de ralentización (mucho más grande que el anterior), que ralentiza al personaje cuando pasa dicho radio. En éste último, se iguala su velocidad actual con una velocidad máxima establecida previamente. Por contra, en el de llegada, su velocidad se establece a cero. Además, en la zona entre los dos radios, se calcula una interpolación intermedia, controlada por la distancia hasta el objetivo.
+
+La estructura del algoritmo se puede representar a través del siguiente _pseudo-código_:
+
+```
+class Arrive:
+    character: Kinematic
+    target: Kinematic
+
+    maxAcceleration: float
+    maxSpeed: float
+
+    # The radius for arriving at the target.
+    targetRadius: float
+
+    # The radius for beginning to slow down.
+    slowRadius: float
+
+    # The time over which to achieve target speed.
+    timeToTarget: float = 0.1
+
+    function getSteering() -> SteeringOutput:
+        result = new SteeringOutput()
+
+        # Get the direction to the target.
+        direction = target.position - character.position
+        distance = direction.length()
+
+        # Check if we are there, return no steering.
+        if distance < targetRadius:
+            return null
+
+        # If we are outside the slowRadius, then move at max speed.
+        if distance > slowRadius:
+            targetSpeed = maxSpeed
+        # Otherwise calculate a scaled speed.
+        else:
+            targetSpeed = maxSpeed * distance / slowRadius
+
+    # The target velocity combines speed and direction.
+    targetVelocity = direction
+    targetVelocity.normalize()
+    targetVelocity *= targetSpeed
+
+    # Acceleration tries to get to the target velocity.
+    result.linear = targetVelocity - character.velocity
+    result.linear /= timeToTarget
+
+    # Check if the acceleration is too fast.
+    if result.linear.length() > maxAcceleration:
+        result.linear.normalize()
+        result.linear *= maxAcceleration
+
+    result.angular = 0
+    return result
+```
 
 C. Implementar el movimiento del perro para la huida causado por la cercanía de las ratas respecto al perro.
 
