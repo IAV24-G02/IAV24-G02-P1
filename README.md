@@ -116,9 +116,9 @@ La situación es la que se muestra en la siguiente imagen:
 
 ![Figure 3.34: A stable equilibrium](images/C.png)
 
-El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el player. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: persecución y huida con prioridad del de huida frente al de persecución.
+El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el _player_. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: llegada y huida con prioridad del comportamiento de huida frente al de llegada.
 
-El pseudocódigo del algoritmo de huida sería muy parecido al de persecución pero intercambiando la posición del target con el de la propia entidad. Aún así, en este caso hablamos de huir de un grupo de ratas y no de huir de solo un target por lo que habría que modificar algo más:
+El pseudocódigo del algoritmo de huida sería muy parecido al de _seek_ pero intercambiando la posición del target con el de la propia entidad. Aún así, en este caso hablamos de huir de un grupo de ratas y no de huir de solo un target por lo que habría que modificar algo más:
 ```
 class Static:
     position: Vector
@@ -131,7 +131,7 @@ class KinematicSteeringOutput:
 class FleeFromAGroup:
     character: Static
     # List of targets.
-    target: Static[]
+    targets: Static[]
 
     maxSpeed: float
 
@@ -183,6 +183,7 @@ for target in targets:
 ```
 
 Luego, contando con el comportamiento de persecución del apartado anterior, necesitaremos el siguiente pseudocódigo para combinarlos y priorizar el comportamiento de huida:
+
 ```
 class SteeringOutput:
     linear: Vector
@@ -261,7 +262,7 @@ D. [ALFONSO]
 
 E. Cuando el flautista toca la flauta, se produce el desplazamiento en bandada (hipnosis) de las ratas, con movimiento dinámico en formación (seguimiento, cohesión y separación) y control de llegada hasta las proximidades del flautista. Las ratas encaran al flautista si toca la flauta.
 
-El pseudocódigo utilizado para los comportamientos de Llegada y Seguimiento del Perro serán reutilizados para las Ratas. En adición a estos comportamientos añadiremos uno de Separación:
+El pseudocódigo utilizado para los comportamientos de Llegada, Seguimiento y el cálculo de la posición media de las ratas del Perro serán reutilizados para las Ratas. En adición a estos comportamientos añadiremos uno de Separación:
 
 ```
 class Separacion:
@@ -297,8 +298,7 @@ class Separacion:
  		return result
 ```
 
-Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actua una especie de fuerza de repulsión. Esto hará que las ratas no lleguen a agolparse en el mismo punto evitando colisiones indeseadas.
-
+Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actúa una especie de fuerza de repulsión. Esto hará que las ratas no lleguen a agolparse en el mismo punto evitando colisiones indeseadas.
 
 ## Pruebas y métricas
 
@@ -316,7 +316,7 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
 | **Característica D** | | |
 | **Característica E** | | |
-| Probar con un número elevado de ratas que estas cuando se toca la flauta sigan al Player y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
+| Probar con un número elevado de ratas que cuando se toca la flauta sigan al _player_ y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
 | Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre Ratas | Distance: 1 | _link no disponible_ |
 
 ## Ampliaciones
@@ -334,7 +334,7 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 |:-:|:--|:-:|
 |  | Diseño: Primer borrador | ..-..-2024 |
 | ✔ | Característica A: Tocar flauta con el clic derecho | 01-02-2024 |
-|  | Característica A: Introducir número de ratas específico | ..-..-2024 |
+| ✔ | Característica A: Introducir número de ratas específico | 11-02-2024 |
 |  | Característica B | ..-..-2024 |
 |  | Característica C | ..-..-2024 |
 |  | Característica D | ..-..-2024 |
