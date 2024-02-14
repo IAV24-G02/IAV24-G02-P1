@@ -58,7 +58,7 @@ namespace UCM.IAV.Movimiento
 
                 // Comprueba si el objetivo está cerca
                 Vector3 direccion = new Vector3();
-                direccion = target.transform.position - transform.position;
+                direccion = transform.position - target.transform.position;
                 float distancia = direccion.magnitude;
 
                 if (distancia < umbral)
@@ -71,7 +71,7 @@ namespace UCM.IAV.Movimiento
 
                     // Añade la aceleración
                     direccion.Normalize();
-                    result.lineal -= strength * direccion;
+                    result.lineal += strength * direccion;
 
                     Debug.Log(result.lineal);
                 }

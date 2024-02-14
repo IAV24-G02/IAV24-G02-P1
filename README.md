@@ -29,9 +29,9 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 | Animador Avatar | Asigna el valor de la velocidad del rigidbody de la entidad al componente de Animator para que se reproduzca la animación que le corresponda.  |
 | Seguimiento Camara | Calcula la posición interpolada entre el _target_ (el _player_) y la propia entidad (la cámara) con cierta velocidad de suavizado y cierto _offset_ para producir un comportamiento de seguimiento. |
 | COMPORTAMIENTOS | |
-| Control Jugador | |
-| Huir | |
-| Llegada | |
+| Control Jugador | Gestionará el movimiento del Player por el escenario. |
+| Huir | Manejará el comportamiento de Huida de otro Agente. |
+| Llegada | Gestionará el comportamiento de Seguimiento con Llegada de una Agente hacia otro. Recibe valores para la aceleración y la velocidad máxima, la distancia al objetivo, y los dos radios claves entre los cuáles el Agente perseguidor decelerará hasta llegar a la distancia objetivo. |
 | Merodear | Componente que hará que las ratas deambulen mientras no se toque la flauta. Tiene variables para los tiempos y direcciones utilizadas para las orientaciones. |
 | Separación | Se encargará de que las entidades no se solapen cuando sigan a otra entidad. Establece valores para los targets, el umbral de activación y el coeficiente de repulsión.  |
 | Tocar Flauta | Se encarga de gestionar las acciones cuando se toca o no la flauta. Si pulsamos clic derecho activamos la flauta y con ello los efectos audiovisuales de la misma, además de activar los comportamientos de Separación y Llegada de las ratas. Si dejamos de clicar se desactiva todo lo anterior y empieza el Merodeo de las Ratas. |
@@ -282,7 +282,7 @@ class Separacion:
  		# Loop through each target.
  		for target in targets:
  			# Check if the target is close.
- 			direction = target.position- character.position
+ 			direction = character.position - target.position
  			distance = direction.length()
 			if distance < threshold:
  				# Calculate the strength of repulsion
@@ -297,7 +297,7 @@ class Separacion:
  		return result
 ```
 
-Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actua una especie de fuerza de repulsión.
+Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actua una especie de fuerza de repulsión. Esto hará que las ratas no lleguen a agolparse en el mismo punto evitando colisiones indeseadas.
 
 
 ## Pruebas y métricas
@@ -316,6 +316,8 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
 | **Característica D** | | |
 | **Característica E** | | |
+| Probar con un número elevado de ratas que estas cuando se toca la flauta sigan al Player y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
+| Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre Ratas | Distance: 1 | _link no disponible_ |
 
 ## Ampliaciones
 
