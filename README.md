@@ -36,10 +36,10 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 | Separación | Se encargará de que las entidades no se solapen cuando sigan a otra entidad. Establece valores para los targets, el umbral de activación y el coeficiente de repulsión.  |
 | Tocar Flauta | Se encarga de gestionar las acciones cuando se toca o no la flauta. Si pulsamos clic derecho activamos la flauta y con ello los efectos audiovisuales de la misma, además de activar los comportamientos de Separación y Llegada de las ratas. Si dejamos de clicar se desactiva todo lo anterior y empieza el Merodeo de las Ratas. |
 | GENERALES | |
-| Agente | |
-| Comportamiento Agente | | 
-| Direccion | |
-| Gestor Juego | |
+| Agente | Controlador de todos los comportamientos que puede realizar el _agente_. Tiene valores de velocidad, rotación y aceleración (tanto actuales como máximas) así como diferentes métodos de actuación en base a la prioridad que se le pida (véase peso o prioridad). |
+| Comportamiento Agente | Clase abstracta sobre la que parten el resto de comportamientos. Contiene un float peso e int prioridad, que pueden ser o no utilizados para comportamientos en base a la prioridad o el peso del _agente_ en cuestión. | 
+| Direccion | Instrucciones básicas de cualquiera de los _agentes_ de la escena. Éstas se encargan de corregir el movimiento dinámicamente mediante aceleraciones. Contiene un Vector3 lineal que almacena su velocidad lineal y un float angular que almacena su velocidad angular. |
+| Gestor Juego | Controlador de eventos y de _agentes_ de la escena. Tiene control de la tasa de fotogramas por segundo, el contador de ratas y el propio escenario (entre otros). También se encarga de la generación y destrucción de ratas. |
 
 ## Diseño de la solución
 
@@ -310,6 +310,9 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Sin obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
 | Con obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
 | **Característica B** | | |
+| Probar que el _perro_ sigue al jugador allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | _link no disponible_ |
+| Probar que el _perro_ se mantiene a cierta distancia del _jugador_, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el perro es correcta y se combina bien con el seguimiento | _link no disponible_ |
+| Probar que el _perro_ siempre mira hacia el _jugador_, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | _link no disponible_ |
 | **Característica C** | | |
 | Probar que cambia de comportamiento de persecución al de huida | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) | _link no disponible_ |
 | Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al _player_ | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
