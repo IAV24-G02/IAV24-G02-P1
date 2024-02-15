@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3938823469589161587}
   - component: {fileID: 6833427840778598065}
   - component: {fileID: 2129874214364473491}
+  - component: {fileID: 4927080821577829587}
   - component: {fileID: -317693632321659350}
   m_Layer: 0
   m_Name: Rata
@@ -106,6 +107,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4927080821577829587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131845400584305642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff165d9358587c146b7cc6e66cbdba1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 0}
+  tiempoMaximo: 2
+  tiempoMinimo: 1
 --- !u!114 &-317693632321659350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +139,7 @@ MonoBehaviour:
   peso: 1
   prioridad: 1
   objetivo: {fileID: 0}
+  maxAcceleration: 0
   targEmpty: {fileID: 0}
   umbral: 0
   decayCoefficient: 0
