@@ -51,8 +51,9 @@ B. Para empezar a programar el acompañamiento del perro al flautista, primero s
 
 En primer lugar, el objetivo del algoritmo de llegada será ralentizarse para que llegue a la ubicación exacta.
 
-![Figure 3.9: Arriving](images/arrive_diagram.png)
-
+<div style="text-align: center;">
+    <img src="images/arrive_diagram.png" alt="Figure 3.9: Arriving" width="200" height="200">
+</div>
 Dicho algoritmo utiliza dos radios: uno de llegada, que permite al personaje acercarse lo suficiente al objetivo sin importar el margen de error, y otro de ralentización (mucho más grande que el anterior), que ralentiza al personaje cuando pasa dicho radio. En éste último, se iguala su velocidad actual con una velocidad máxima establecida previamente. Por contra, en el de llegada, su velocidad se establece a cero. Además, en la zona entre los dos radios, se calcula una interpolación intermedia, controlada por la distancia hasta el objetivo.
 
 La estructura del algoritmo se puede representar a través del siguiente _pseudo-código_:
@@ -114,7 +115,9 @@ C. Implementar el movimiento del perro para la huida causado por la cercanía de
 
 La situación es la que se muestra en la siguiente imagen:
 
-![Figure 3.34: A stable equilibrium](images/C.png)
+<div style="text-align: center;">
+    <img src="images/C.png" alt="Figure 3.34: A stable equilibrium" width="500" height="300">
+</div>
 
 El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el _player_. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: llegada y huida con prioridad del comportamiento de huida frente al de llegada.
 

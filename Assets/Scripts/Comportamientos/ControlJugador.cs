@@ -20,9 +20,10 @@ namespace UCM.IAV.Movimiento
         #region references
         ScreenToWorld screenToWorld;
         #endregion
-        #region parameters
+        #region properties
         Vector3 worldPoint;
         #endregion
+
         /// <summary>
         /// Obtiene la dirección
         /// </summary>

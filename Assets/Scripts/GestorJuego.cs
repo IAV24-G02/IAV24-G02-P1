@@ -26,6 +26,10 @@ namespace UCM.IAV.Movimiento
         [SerializeField]
         GameObject rataPrefab = null;
 
+        [SerializeField]
+        GameObject perro = null;
+        Huir perroHuir = null;
+
         // textos UI
         [SerializeField]
         Text fRText;   
@@ -84,6 +88,7 @@ namespace UCM.IAV.Movimiento
             Application.targetFrameRate = frameRate;
             numRats = rataGO.transform.childCount;
             ratText.text = numRats.ToString();
+            perroHuir = perro.GetComponent<Huir>();
         }
 
         // Se llama cuando el juego ha terminado
@@ -153,7 +158,8 @@ namespace UCM.IAV.Movimiento
 
             for (int i = 0; i < quantity; ++i)
             {
-                Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
+                GameObject rata = Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
+                perroHuir.AddRata(rata);
             }
 
             numRats += quantity;
@@ -175,6 +181,7 @@ namespace UCM.IAV.Movimiento
             // Destruir los objetos recolectados.
             foreach (var obj in toDestroy)
             {
+                perroHuir.RemoveRata(obj);
                 Destroy(obj);
             }
 
