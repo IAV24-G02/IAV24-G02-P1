@@ -23,10 +23,12 @@ namespace UCM.IAV.Movimiento
         public float velMaxima;
 
         // El radio para llegar al objetivo
-        private float rObjetivo;
+        [SerializeField]
+        private float rObjetivo = 6.0f;
 
         // El radio en el que se empieza a ralentizarse
-        private float rRalentizado;
+        [SerializeField]
+        private float rRalentizado = 15.0f;
 
         // El tiempo en el que conseguir la aceleracion objetivo
         private float timeToTarget = 0.1f;
@@ -53,14 +55,17 @@ namespace UCM.IAV.Movimiento
 
             // Comprueba si ya ha llegado
             if (distancia < rObjetivo)
-                return null; // en tal caso devuelve nulo
+                velObjetivo = 0.0f;
 
             // Si estamos fuera del rRalentizado
-            if (distancia > rRalentizado)
+            else if (distancia > rRalentizado)
                 velObjetivo = velMaxima; // entonces se mueve a velocidad máxima
             // En otro caso calcula la velocidad en escala
             else
                 velObjetivo = velMaxima * distancia / rRalentizado;
+
+
+            Debug.Log("Velocidad objetivo: " + velObjetivo);
 
             // La velocidad objetivo combina velocidad y dirección
             Vector3 vObjetivo = new Vector3();
