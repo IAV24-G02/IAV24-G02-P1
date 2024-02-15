@@ -457,7 +457,7 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al _player_ | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
 | Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
 | **Característica D** | | |
-| Probar que una vez el flautista deja de tocar la flauta, las ratas comienzan un merodeo errático y desordenado, hasta que el flautista deje de tocar.| Click derecho para desactivar la flauta y click derecho para volverla a activar. | _link no disponible_ |
+| Probar que una vez el flautista deja de tocar la flauta, las ratas comienzan un merodeo errático y desordenado, hasta que el flautista empiece a tocar de nuevo. | Click derecho para activar y desactivar la flauta. | _link no disponible_ |
 | Probar con diferentes valores del wander offset y del wander radius para observar si las ratas merodean de una forma más compacta(como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | _link no disponible_ |
 | **Característica E** | | |
 | Probar con un número elevado de ratas que cuando se toca la flauta sigan al _player_ y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
