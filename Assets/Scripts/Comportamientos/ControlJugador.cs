@@ -21,7 +21,6 @@ namespace UCM.IAV.Movimiento
         /// Obtiene la dirección
         /// </summary>
         /// <returns></returns>
-
         public override Direccion GetDireccion()
         {
             Direccion direccion = new Direccion();
