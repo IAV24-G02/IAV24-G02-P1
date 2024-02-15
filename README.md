@@ -36,10 +36,10 @@ Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profes
 | Separación | Se encargará de que las entidades no se solapen cuando sigan a otra entidad. Establece valores para los targets, el umbral de activación y el coeficiente de repulsión.  |
 | Tocar Flauta | Se encarga de gestionar las acciones cuando se toca o no la flauta. Si pulsamos clic derecho activamos la flauta y con ello los efectos audiovisuales de la misma, además de activar los comportamientos de Separación y Llegada de las ratas. Si dejamos de clicar se desactiva todo lo anterior y empieza el Merodeo de las Ratas. |
 | GENERALES | |
-| Agente | Controlador de todos los comportamientos que puede realizar el _agente_. Tiene valores de velocidad, rotación y aceleración (tanto actuales como máximas) así como diferentes métodos de actuación en base a la prioridad que se le pida (véase peso o prioridad). |
-| Comportamiento Agente | Clase abstracta sobre la que parten el resto de comportamientos. Contiene un float peso e int prioridad, que pueden ser o no utilizados para comportamientos en base a la prioridad o el peso del _agente_ en cuestión. | 
+| Agente | Controlador de todos los comportamientos que puede realizar el _agente_. Tiene valores de velocidad, rotación y aceleración (tanto actuales como máximas) así como diferentes métodos de actuación en base a la mezcla de comportamientos que se le pida (véase peso o prioridad). Los valores de velocidad, rotación y aceleración serán actualizados según físicas o no en función de si el _agente_ en cuestión es cinemático o no.|
+| Comportamiento Agente | Clase abstracta sobre la que parten el resto de comportamientos. Contiene un float peso e int prioridad, que pueden ser o no utilizados ,si el _agente_ en cuestión tiene habilitada la mezcla por peso o prioridad, para la combinación de comportamientos. | 
 | Direccion | Instrucciones básicas de cualquiera de los _agentes_ de la escena. Éstas se encargan de corregir el movimiento dinámicamente mediante aceleraciones. Contiene un Vector3 lineal que almacena su velocidad lineal y un float angular que almacena su velocidad angular. |
-| Gestor Juego | Controlador de eventos y de _agentes_ de la escena. Tiene control de la tasa de fotogramas por segundo, el contador de ratas y el propio escenario (entre otros). También se encarga de la generación y destrucción de ratas. |
+| Gestor Juego | Controlador de eventos y de _agentes_ de la escena. Tiene control sobre la tasa de fotogramas por segundo, el contador de rat, el propio escenario y la cámara. Se encarga de la generación y destrucción de ratas, del reinicio de la escena, de mostrar u ocultar los elementos de la escena, de cambiar el frame rate y de cambiar el punto de vista de la cámara. |
 
 ## Diseño de la solución
 
@@ -260,6 +260,147 @@ class PrioritySteering:
 
 D. [ALFONSO]
 
+El merodeo de las ratas en ausencia de la música emanada por la flauta viene implementado haciendo uso de tres algoritmos distintos en relación de herencia.
+
+De esta forma obtenemos un resultado suave dentro de la aleatoridad del movimiento de estas.
+
+Por un lado tenemos el  _pseudo-código_ de `Align` (alineamiento).
+Este equipara la orientación del sujeto que lo usa a la orientacción de un objetivo, rotando en el proceso por el camino más corto
+
+Hace uso de dos variables. 
+Un radio dentro del cuál la rotación del sujeto deberá ralentizarse lentamente hasta llegar al radio deseado (slowRadius) y un radio que representa el radios necesario para llegar a la orientación elegida (targetRadius).
+
+```
+class Align:
+	character: Kinematic
+	target: Kinematic
+
+	maxAngularAcceleration: float
+	maxRotation: float
+
+	#The radius for arriving at the target.
+	targetRadius: float
+
+	#The radius for beginning to slow down.
+	slowRadius: float
+
+	#The time over which to achieve target spedd.
+	timeToTarget: float = 0.1
+
+	function getSteering() -> SteeringOutput:
+		result = new SteeringOutput();
+		
+		#Get the naive direction to the target.
+		rotation = target.orientation - character.orientation
+
+		#Map the result to the (-pi, pi) interval.
+		rotation = mapToRange(rotation)
+		rotationSize = abs(rotation)
+
+		#Check if we are there, return no steering.
+		ir rotationSIze < targetRadius:
+			return null
+
+		#If we are outside the slowRadius, then use maximun rotation.
+		if rotationSize > slowRadius:
+			targetRotation = maxRotation
+
+		#Otherwise calculate a scaled rotation.
+		else:
+			targetRotation = 
+				maRotation * rotationSize / slowRadius
+
+		
+
+		#The final target rotation combines speed ( already in the 
+		#variable) and direction.
+		targetRotation *= rotation / rotationSize
+
+		#Acceleration tries to get to the target rotation.
+		result.angular = targetRotation - character.rotation
+		result.angular /= timeToTarget
+	
+		#Check if the acceleration is too great.
+		angularAcceleration = abs(result.angular)
+		if angularAcceleration > maxAngularAcceleration:
+			result.angular /= angularAcceleration
+			result.angular	*= maxAngularAcceleration
+
+		result.linear = 0
+		return result
+
+```
+A continuación tenemos el  _pseudo-código_ de `Face` (encarar), que hace uso de Align para modificar la orientación del quién haga uso de este para que apunte al objetivo seleccionado.
+Se diferencia de Align en que no solo se iguala orientación, si no que se mira hacia un objetivo en base a dicha orientación original.
+```
+class Face extends Align:
+	#Overrides the Align.target member.
+	target: Kinematic
+
+	#... Other data is derived fromt he superClass...
+	#Implemented as it was in Pursue
+	function getSteering -> SteeringOutput: 
+		#1. Calculate the target to delegate to align
+		#Work out the direction to target.
+		direction = target.position - character.position
+		
+		#Check for a zero direction, and make no change if so.
+		if direction.length() == 0:
+			return target
+
+		#2. Delegate to align.
+		Align.target = explicitTarget
+		Align.target.orientation = atan2(-direction.x, direction.z)
+		return Align.getSteering
+```
+Finalmente tenemos el  _pseudo-código_ de `Wander` (merodeo) que se encarga de fijar un objetivo aleatorio situado unos pasos por delante del sujeto que hace uso de Wander y lo sigue.
+
+Hace uso tanto de Face como de Align puesto que el merodeo, aún siendo aleatorio se hace siguiendo un movimiento coherente tick a tick.
+
+```
+class Wander extends Face:
+	# The radius and forward offset of the wander circle.
+	wanderOffset: float
+	wanderRadius: float
+																									
+	# The maximum rate at which the wander orientation can change. 
+	wanderRate: float
+
+	# The current orientation of the wander target. 
+	wanderOrientation: float
+		
+	# The maximum acceleration of the character. 
+	maxAcceleration: float
+
+	# Again we don't need a new target.
+	#... Other data is derived from the superclass
+
+	function getSteering()-> SteeringOutput:
+		# 1. Calculate the target to delegate to face
+		# Update the wander orientation.
+		wanderOrientation += randomBinomial() * wanderRate
+
+		# Calculate the combined target orientation.
+		targetOrientation = wanderOrientation + character.orientation
+		# Calculate the center of the wander circle.
+		target = character.position + wanderOffset * 								character.orientation.asVector()
+		#Calculate the target location.
+		target += wanderRadius * targetOrientation.asVector()
+
+		# 2. Delegate to face.
+		result = Face.getSteering()
+
+		# 3. Now set the linear acceleration to be at full
+		# acceleration in the direction of the orientation. 
+		result.linear = maxAcceleration * character. orientation.asVector()
+
+		# Return it. 
+		return result
+```
+
+
+
+
 E. Cuando el flautista toca la flauta, se produce el desplazamiento en bandada (hipnosis) de las ratas, con movimiento dinámico en formación (seguimiento, cohesión y separación) y control de llegada hasta las proximidades del flautista. Las ratas encaran al flautista si toca la flauta.
 
 El pseudocódigo utilizado para los comportamientos de Llegada, Seguimiento y el cálculo de la posición media de las ratas del Perro serán reutilizados para las Ratas. En adición a estos comportamientos añadiremos uno de Separación:
@@ -318,6 +459,8 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al _player_ | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
 | Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
 | **Característica D** | | |
+| Probar que una vez el flautista deja de tocar la flauta, las ratas comienzan un merodeo errático y desordenado, hasta que el flautista deje de tocar.| Click derecho para desactivar la flauta y click derecho para volverla a activar. | _link no disponible_ |
+| Probar con diferentes valores del wander offset y del wander radius para observar si las ratas merodean de una forma más compacta(como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | _link no disponible_ |
 | **Característica E** | | |
 | Probar con un número elevado de ratas que cuando se toca la flauta sigan al _player_ y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
 | Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre Ratas | Distance: 1 | _link no disponible_ |
