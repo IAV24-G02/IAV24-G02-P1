@@ -258,9 +258,7 @@ class PrioritySteering:
     Luego se verifica si la magnitud de la aceleración lineal del resultado o si el valor absoluto de la aceleración angular son mayores que epsilon. Si alguna de estas condiciones se cumple, significa que el grupo actual produce una aceleración suficientemente significativa, y el método devuelve inmediatamente este resultado de aceleración.
     Si se itera a través de todos los grupos sin encontrar una aceleración significativa, el método devuelve la aceleración del último grupo evaluado, aunque esta sea pequeña.
 
-D. [ALFONSO]
-
-El merodeo de las ratas en ausencia de la música emanada por la flauta viene implementado haciendo uso de tres algoritmos distintos en relación de herencia.
+D. El merodeo de las ratas en ausencia de la música emanada por la flauta viene implementado haciendo uso de tres algoritmos distintos en relación de herencia.
 
 De esta forma obtenemos un resultado suave dentro de la aleatoridad del movimiento de estas.
 
@@ -481,7 +479,7 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 |  | Diseño: Primer borrador | ..-..-2024 |
 | ✔ | Característica A: Tocar flauta con el clic derecho | 01-02-2024 |
 | ✔ | Característica A: Introducir número de ratas específico | 11-02-2024 |
-|  | Característica B | ..-..-2024 |
+| ✔ | Característica B: Seguimiento del perro al jugador | 12-02-2024 |
 |  | Característica C | ..-..-2024 |
 |  | Característica D | ..-..-2024 |
 |  | Característica E | ..-..-2024 |
