@@ -16,7 +16,6 @@ using UnityEngine.UI;
 
 namespace UCM.IAV.Movimiento
 {
-
     public class GestorJuego : MonoBehaviour
     {
         public static GestorJuego instance = null;
@@ -49,7 +48,7 @@ namespace UCM.IAV.Movimiento
         private bool cameraPerspective = true;
         private void Awake()
         {
-            //Cosa que viene en los apuntes para que el gestor del juego no se destruya entre escenas
+            // Para que el gestor del juego no se destruya entre escenas
             if (instance == null)
             {
                 instance = this;
@@ -64,10 +63,6 @@ namespace UCM.IAV.Movimiento
         // Lo primero que se llama al activarse (tras el Awake)
         void OnEnable()
         {
-
-            // No necesito este delegado
-            //SceneManager.activeSceneChanged += OnSceneWasSwitched;
-
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 

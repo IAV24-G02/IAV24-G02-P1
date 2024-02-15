@@ -73,7 +73,7 @@ namespace UCM.IAV.Movimiento
                     direccion.Normalize();
                     result.lineal += strength * direccion;
 
-                    Debug.Log(result.lineal);
+                    //Debug.Log(result.lineal);
                 }
             }
 
