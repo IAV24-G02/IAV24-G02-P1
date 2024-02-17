@@ -2207,15 +2207,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774483602}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04975c86d88a65349a8c27aebc417ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   peso: 1
   prioridad: 1
-  objetivo: {fileID: 0}
-  radio: 1
+  objetivo: {fileID: 919132148976998258}
+  radio: 3
   ratsTransform: []
 --- !u!4 &810378525 stripped
 Transform:
@@ -4999,6 +4999,11 @@ PrefabInstance:
       objectReference: {fileID: 330855439}
     - target: {fileID: 144771709064956863, guid: f257940796e504f4eb42d847836e9ef8,
         type: 3}
+      propertyPath: perro
+      value: 
+      objectReference: {fileID: 774483602}
+    - target: {fileID: 144771709064956863, guid: f257940796e504f4eb42d847836e9ef8,
+        type: 3}
       propertyPath: fRText
       value: 
       objectReference: {fileID: 1942718252}
@@ -5905,7 +5910,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3861295050334874256, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
-      insertIndex: 3
+      insertIndex: -1
       addedObject: {fileID: 774483604}
     - targetCorrespondingSourceObject: {fileID: 3861295050334874256, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}

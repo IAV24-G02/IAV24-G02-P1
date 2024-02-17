@@ -18,12 +18,9 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Huir : ComportamientoAgente
     {
-        #region properties
-        Vector3 averagePosition;
-        #endregion
         #region parameters
         [SerializeField]
-        private float radio = 5.0f;
+        private float radio = 3.0f;
         #endregion
         #region references
         public List<Transform> ratsTransform;
@@ -47,6 +44,7 @@ namespace UCM.IAV.Movimiento
         public override Direccion GetDireccion()
         {
             Direccion direccion = new Direccion();
+            Vector3 averagePosition = Vector3.zero;
 
             foreach (Transform rataTransform in ratsTransform)
             {
@@ -55,15 +53,15 @@ namespace UCM.IAV.Movimiento
                     averagePosition += rataTransform.position;
                 }
             }
-            if (ratsTransform.Count != 0) 
+
+            if (ratsTransform.Count != 0 && averagePosition != Vector3.zero)
+            {
                 averagePosition /= ratsTransform.Count;
-            else 
-                averagePosition = myTransform.position;
 
-            direccion.lineal = myTransform.position - averagePosition;
-
-            direccion.lineal.Normalize();
-            direccion.lineal *= agente.aceleracionMax;
+                direccion.lineal = myTransform.position - averagePosition;
+                direccion.lineal.Normalize();
+                direccion.lineal *= agente.aceleracionMax;
+            }
 
             return direccion;
         }

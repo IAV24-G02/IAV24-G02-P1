@@ -64,8 +64,7 @@ namespace UCM.IAV.Movimiento
             else
                 velObjetivo = velMaxima * distancia / rRalentizado;
 
-
-            Debug.Log("Velocidad objetivo: " + velObjetivo);
+            //Debug.Log("Velocidad objetivo: " + velObjetivo);
 
             // La velocidad objetivo combina velocidad y dirección
             Vector3 vObjetivo = new Vector3();
