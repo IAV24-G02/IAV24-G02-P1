@@ -1,17 +1,17 @@
 # IAV - Práctica 1
 
 ## Autores
-- Yi (Laura) Wang Qiu (LauraWangQiu)
-- Agustín Castro De Troya (AgusCDT)
-- Ignacio Ligero Martín (theligero)
-- Alfonso Jaime Rodulfo Guío (ARodulfo)
+- Yi (Laura) Wang Qiu [GitHub](https://github.com/LauraWangQiu)
+- Agustín Castro De Troya [GitHub](https://github.com/AgusCDT)
+- Ignacio Ligero Martín [GitHub](https://github.com/theligero)
+- Alfonso Jaime Rodulfo Guío [GitHub](https://github.com/ARodulfo)
 
 ## Propuesta
 Este proyecto es una práctica de la asignatura de Inteligencia Artificial para Videojuegos del Grado en Desarrollo de Videojuegos de la UCM, cuyo enunciado original es este: [Plaga de Ratas](https://narratech.com/es/inteligencia-artificial-para-videojuegos/percepcion-y-movimiento/plaga-de-ratas/).
 
 Esta práctica consiste en recrear los comportamientos de una serie de personajes en una escena con obstáculos:
 
-- Flautista: será nuestro _player_ al que controlaremos mediante el teclado y ratón. Se podrá mover por toda la escena sin atravesar los obstáculos y podrá tocar la flauta y dejar de hacerlo.
+- Flautista: será el avatar del jugador al que controlaremos mediante el teclado y ratón. Se podrá mover por toda la escena sin atravesar los obstáculos y podrá tocar la flauta y dejar de hacerlo.
 
 - Perro: fiel compañero del flautista. Perseguirá al flautista con cierto control de llegada siempre y cuando no haya ratas cerca, en ese caso, huye y deja de perseguir al flautista.
 
@@ -22,28 +22,29 @@ Esta práctica consiste en recrear los comportamientos de una serie de personaje
 
 Se parte de un proyecto base de **Unity 2022.3.5f1** proporcionado por el profesor y disponible en este repositorio: [IAV-Movimiento](https://github.com/Narratech/IAV-Movimiento)
 
-| Clases | Información |
+| Clases: ANIMACIONES | Información |
 | - | - |
-| ANIMACIONES | |
 | Animador Animal | Establece un booleano de movimiento si se está moviendo o no dependiendo de la velocidad del rigidbody y de un _threshold_ al componente de Animator para que se reproduzca la animación que le corresponda. |
 | Animador Avatar | Asigna el valor de la velocidad del rigidbody de la entidad al componente de Animator para que se reproduzca la animación que le corresponda.  |
-| Seguimiento Camara | Calcula la posición interpolada entre el _target_ (el _player_) y la propia entidad (la cámara) con cierta velocidad de suavizado y cierto _offset_ para producir un comportamiento de seguimiento. |
-| COMPORTAMIENTOS | |
-| Control Jugador | Gestionará el movimiento del Player por el escenario. |
+| Seguimiento Camara | Calcula la posición interpolada entre el _target_ (el avatar) y la propia entidad (la cámara) con cierta velocidad de suavizado y cierto _offset_ para producir un comportamiento de seguimiento. |
+
+| Clases: COMPORTAMIENTOS | Información |
+| - | - |
+| Control Jugador | Gestionará el movimiento del Avatar por el escenario. |
 | Huir | Manejará el comportamiento de Huida de otro Agente. |
 | Llegada | Gestionará el comportamiento de Seguimiento con Llegada de una Agente hacia otro. Recibe valores para la aceleración y la velocidad máxima, la distancia al objetivo, y los dos radios claves entre los cuáles el Agente perseguidor decelerará hasta llegar a la distancia objetivo. |
 | Merodear | Componente que hará que las ratas deambulen mientras no se toque la flauta. Tiene variables para los tiempos y direcciones utilizadas para las orientaciones. |
 | Separación | Se encargará de que las entidades no se solapen cuando sigan a otra entidad. Establece valores para los targets, el umbral de activación y el coeficiente de repulsión.  |
 | Tocar Flauta | Se encarga de gestionar las acciones cuando se toca o no la flauta. Si pulsamos clic derecho activamos la flauta y con ello los efectos audiovisuales de la misma, además de activar los comportamientos de Separación y Llegada de las ratas. Si dejamos de clicar se desactiva todo lo anterior y empieza el Merodeo de las Ratas. |
-| GENERALES | |
+
+| Clases: GENERALES | Información |
+| - | - |
 | Agente | Controlador de todos los comportamientos que puede realizar el _agente_. Tiene valores de velocidad, rotación y aceleración (tanto actuales como máximas) así como diferentes métodos de actuación en base a la mezcla de comportamientos que se le pida (véase peso o prioridad). Los valores de velocidad, rotación y aceleración serán actualizados según físicas o no en función de si el _agente_ en cuestión es cinemático o no.|
 | Comportamiento Agente | Clase abstracta sobre la que parten el resto de comportamientos. Contiene un float peso e int prioridad, que pueden ser o no utilizados ,si el _agente_ en cuestión tiene habilitada la mezcla por peso o prioridad, para la combinación de comportamientos. | 
 | Direccion | Instrucciones básicas de cualquiera de los _agentes_ de la escena. Éstas se encargan de corregir el movimiento dinámicamente mediante aceleraciones. Contiene un Vector3 lineal que almacena su velocidad lineal y un float angular que almacena su velocidad angular. |
 | Gestor Juego | Controlador de eventos y de _agentes_ de la escena. Tiene control sobre la tasa de fotogramas por segundo, el contador de rat, el propio escenario y la cámara. Se encarga de la generación y destrucción de ratas, del reinicio de la escena, de mostrar u ocultar los elementos de la escena, de cambiar el frame rate y de cambiar el punto de vista de la cámara. |
 
 ## Diseño de la solución
-
-Lo que vamos a realizar para resolver esta práctica es...
 
 A. Modificar el input de tocar la flauta para que se realice con el `clic derecho` e implementar una `caja de texto` y un `botón` para poder introducir un número de ratas específico.
 
@@ -53,6 +54,9 @@ En primer lugar, el objetivo del algoritmo de llegada será ralentizarse para qu
 
 <div style="text-align: center;">
     <img src="images/arrive_diagram.png" alt="Figure 3.9: Arriving" width="200" height="200">
+    <p>
+    [Page 61 - Figure 3.9: Arriving] IAN MILLINGTON, <i>AI for Games</i>, Third Edition, 2019.
+    </p>
 </div>
 Dicho algoritmo utiliza dos radios: uno de llegada, que permite al personaje acercarse lo suficiente al objetivo sin importar el margen de error, y otro de ralentización (mucho más grande que el anterior), que ralentiza al personaje cuando pasa dicho radio. En éste último, se iguala su velocidad actual con una velocidad máxima establecida previamente. Por contra, en el de llegada, su velocidad se establece a cero. Además, en la zona entre los dos radios, se calcula una interpolación intermedia, controlada por la distancia hasta el objetivo.
 
@@ -117,9 +121,12 @@ La situación es la que se muestra en la siguiente imagen:
 
 <div style="text-align: center;">
     <img src="images/C.png" alt="Figure 3.34: A stable equilibrium" width="500" height="300">
+    <p>
+    [Page 101 - Figure 3.34: A stable equilibrium] IAN MILLINGTON, <i>AI for Games</i>, Third Edition, 2019.
+    </p>
 </div>
 
-El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el _player_. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: llegada y huida con prioridad del comportamiento de huida frente al de llegada.
+El círculo blanco representa al perro y su comportamiento normal es seguir al Target, el avatar. Sin embargo, hay enemigos (las ratas) que hacen que quiera evitarlos pasando a un comportamiento de huida y siendo un comportamiento más prioritario. Esto significa que hay comportamientos de dirección combinados: llegada y huida con prioridad del comportamiento de huida frente al de llegada.
 
 El pseudocódigo del algoritmo de huida sería muy parecido al de _seek_ pero intercambiando la posición del target con el de la propia entidad. Aún así, en este caso hablamos de huir de un grupo de ratas y no de huir de solo un target por lo que habría que modificar algo más:
 ```
@@ -447,23 +454,23 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica A** | | |
-| Probar que el _player_ toque la flauta con el clic derecho | Clic derecho, ver que se reproduce música y sale un radio | _link no disponible_ |
+| Probar que el Avatar toque la flauta con el clic derecho | Clic derecho, ver que se reproduce música y sale un radio | _link no disponible_ |
 | Probar que al introducir un número N de ratas en la caja de texto se produzca en la escena | Introducimos valores no númericos (a, ?, ...), valores numéricos negativos (-1, -1000), valores numéricos cualesquiera en la caja de texto y ENTER | _link no disponible_ |
-| Sin obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
-| Con obstáculos, probar que el movimiento del _player_ funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
+| Sin obstáculos, probar que el movimiento del Avatar funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
+| Con obstáculos, probar que el movimiento del Avatar funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
 | **Característica B** | | |
 | Probar que el _perro_ sigue al jugador allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | _link no disponible_ |
 | Probar que el _perro_ se mantiene a cierta distancia del _jugador_, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el perro es correcta y se combina bien con el seguimiento | _link no disponible_ |
 | Probar que el _perro_ siempre mira hacia el _jugador_, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | _link no disponible_ |
 | **Característica C** | | |
 | Probar que cambia de comportamiento de persecución al de huida | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) | _link no disponible_ |
-| Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al _player_ | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
+| Probar que durante el comportamiento de huida, se quiten las ratas que lo perjudican y ver que vuelve a perseguir al Avatar | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y dejar de tocar la flauta (el perro vuelve a perseguir) |  _link no disponible_|
 | Probar que a partir de radios diferentes alrededor del perro, el perro huya | Tocamos la flauta con el clic derecho (se acercan las ratas y el perro huye) y cambiamos en el inspector el radio | _link no disponible_ |
 | **Característica D** | | |
 | Probar que una vez el flautista deja de tocar la flauta, las ratas comienzan un merodeo errático y desordenado, hasta que el flautista empiece a tocar de nuevo. | Click derecho para activar y desactivar la flauta. | _link no disponible_ |
 | Probar con diferentes valores del wander offset y del wander radius para observar si las ratas merodean de una forma más compacta(como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | _link no disponible_ |
 | **Característica E** | | |
-| Probar con un número elevado de ratas que cuando se toca la flauta sigan al _player_ y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
+| Probar con un número elevado de ratas que cuando se toca la flauta sigan al Avatar y eviten agolparse entre ellas | Número de Ratas: 50-100 | _link no disponible_ |
 | Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre Ratas | Distance: 1 | _link no disponible_ |
 
 ## Ampliaciones
@@ -479,15 +486,15 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 
 | Estado  |  Tarea  |  Fecha  |  
 |:-:|:--|:-:|
-|  | Diseño: Primer borrador | ..-..-2024 |
+| ✔ | Diseño: Primer borrador | 14-02-2024 |
 | ✔ | Característica A: Tocar flauta con el clic derecho | 01-02-2024 |
 | ✔ | Característica A: Introducir número de ratas específico | 11-02-2024 |
 | ✔ | Característica B: Seguimiento del perro al jugador | 12-02-2024 |
-|  | Característica C: Huida del perro | 17-02-2024 |
+| ✔ | Característica C: Huida del perro | 17-02-2024 |
 |  | Característica D | ..-..-2024 |
 |  | Característica E | ..-..-2024 |
 |  |  OTROS  | |
-|  | Movimiento del avatar con el clic izquierdo | 15-02-2024 |
+| ✔ | Movimiento del avatar con el clic izquierdo | 15-02-2024 |
 |  |  OPCIONALES  | |
 |  | Generador pseudoaleatorio | ..-..-2024 |
 |  | Competición de flautistas | ..-..-2024 |
