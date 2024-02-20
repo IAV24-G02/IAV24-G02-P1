@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2129874214364473491}
   - component: {fileID: 4927080821577829587}
   - component: {fileID: -317693632321659350}
+  - component: {fileID: 1082186374365858194}
   m_Layer: 0
   m_Name: Rata
   m_TagString: Untagged
@@ -143,6 +144,26 @@ MonoBehaviour:
   targEmpty: {fileID: 0}
   umbral: 0
   decayCoefficient: 0
+--- !u!114 &1082186374365858194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131845400584305642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0c5073ef546042b3ba1dd5b02498a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 0}
+  distancia: 7
+  acelMaxima: 0.1
+  velMaxima: 2
+  rObjetivo: 6
+  rRalentizado: 15
 --- !u!1 &8741895683886266571
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,6 +38,7 @@ namespace UCM.IAV.Movimiento
 
         public void Start()
         {
+            objetivo = GameObject.Find("Avatar");
             rbObjetivo = objetivo.GetComponent<Rigidbody>();
         }
 
