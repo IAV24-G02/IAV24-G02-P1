@@ -2198,7 +2198,7 @@ MonoBehaviour:
   distancia: 3
   acelMaxima: 3
   velMaxima: 2
-  rObjetivo: 4
+  rObjetivo: 2
   rRalentizado: 8
 --- !u!114 &774483609
 MonoBehaviour:
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   prioridad: 1
   objetivo: {fileID: 919132148976998258}
   radio: 3
-  ratsTransform: []
+  rats: {fileID: 870761176}
 --- !u!4 &810378525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1311526244833818872, guid: d484baec5db0a944e81bc9394647fb15,

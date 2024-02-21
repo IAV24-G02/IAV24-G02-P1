@@ -21,20 +21,11 @@ namespace UCM.IAV.Movimiento
         #region parameters
         [SerializeField]
         private float radio = 3.0f;
+        [SerializeField]
+        GameObject rats;
         #endregion
         #region references
-        public List<Transform> ratsTransform;
         Transform myTransform;
-        #endregion
-        #region methods
-        public void AddRata(GameObject rata)
-        {
-            ratsTransform.Add(rata.transform);
-        }
-        public void RemoveRata(GameObject rata)
-        {
-            ratsTransform.Remove(rata.transform);
-        }
         #endregion
 
         /// <summary>
@@ -46,21 +37,25 @@ namespace UCM.IAV.Movimiento
             Direccion direccion = new Direccion();
             Vector3 averagePosition = Vector3.zero;
 
-            foreach (Transform rataTransform in ratsTransform)
+            if (rats.transform.childCount > 0)
             {
-                if (Vector3.Distance(myTransform.position, rataTransform.position) < radio)
+                for (int i = 0; i < rats.transform.childCount; i++)
                 {
-                    averagePosition += rataTransform.position;
+                    Vector3 rataPosition = rats.transform.GetChild(i).position;
+                    if (Vector3.Distance(myTransform.position, rataPosition) < radio)
+                    {
+                        averagePosition += rataPosition;
+                    }
                 }
-            }
 
-            if (ratsTransform.Count != 0 && averagePosition != Vector3.zero)
-            {
-                averagePosition /= ratsTransform.Count;
+                if (averagePosition != Vector3.zero)
+                {
+                    averagePosition /= rats.transform.childCount;
 
-                direccion.lineal = myTransform.position - averagePosition;
-                direccion.lineal.Normalize();
-                direccion.lineal *= agente.aceleracionMax;
+                    direccion.lineal = myTransform.position - averagePosition;
+                    direccion.lineal.Normalize();
+                    direccion.lineal *= agente.aceleracionMax;
+                }
             }
 
             return direccion;

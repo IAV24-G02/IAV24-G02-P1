@@ -159,7 +159,6 @@ namespace UCM.IAV.Movimiento
             for (int i = 0; i < quantity; ++i)
             {
                 GameObject rata = Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
-                perroHuir.AddRata(rata);
             }
 
             numRats += quantity;
@@ -181,7 +180,6 @@ namespace UCM.IAV.Movimiento
             // Destruir los objetos recolectados.
             foreach (var obj in toDestroy)
             {
-                perroHuir.RemoveRata(obj);
                 Destroy(obj);
             }
 
