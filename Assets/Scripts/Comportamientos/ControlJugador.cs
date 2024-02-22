@@ -21,9 +21,17 @@ namespace UCM.IAV.Movimiento
         ScreenToWorld screenToWorld;
         [SerializeField]
         private GameObject cheese;
+        [SerializeField]
+        GameObject cheeseContainer;
         #endregion
         #region properties
+        Transform myTransform;
         Vector3 worldPoint;
+        int currentCheese = 0;
+        [SerializeField]
+        private int maxCheese = 5;
+        [SerializeField]
+        private float radio = 3.0f;
         #endregion
 
         /// <summary>
@@ -46,13 +54,17 @@ namespace UCM.IAV.Movimiento
                 direccion.lineal.x = Input.GetAxis("Horizontal");
                 direccion.lineal.z = Input.GetAxis("Vertical");
             }
-            // Cheese           
-            if(screenToWorld != null && Input.GetMouseButtonDown(2))
+
+            #region Ampliacion Quesos
+            if (currentCheese < maxCheese && screenToWorld != null && Input.GetMouseButtonDown(2))
             {
                 Vector3 offset = new Vector3(0, 1, 0);
                 Vector3 cheesePos = screenToWorld.ScreenToWorldPoint(Input.mousePosition);
-                Instantiate(cheese, cheesePos + offset, Quaternion.identity);
+                Instantiate(cheese, cheesePos + offset, Quaternion.identity, cheeseContainer.transform);
+                currentCheese++;
             }
+            #endregion
+
             // Resto de cálculo de movimiento
             direccion.lineal.Normalize();
             direccion.lineal *= agente.aceleracionMax;
@@ -62,6 +74,7 @@ namespace UCM.IAV.Movimiento
 
         void Start()
         {
+            myTransform = GetComponent<Transform>();
             screenToWorld = GetComponent<ScreenToWorld>();
         }
     }

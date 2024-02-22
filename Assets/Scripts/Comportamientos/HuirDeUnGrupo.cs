@@ -28,7 +28,6 @@ namespace UCM.IAV.Movimiento
         #endregion
         #region references
         private Transform myTransform;
-        private LayerMask myObstaclesLayerMask;
         #endregion
 
         /// <summary>
@@ -66,7 +65,6 @@ namespace UCM.IAV.Movimiento
         private void Start()
         {
             myTransform = GetComponent<Transform>();
-            myObstaclesLayerMask = LayerMask.GetMask("Obstaculos");
         }
     }
 }

@@ -158,7 +158,7 @@ namespace UCM.IAV.Movimiento
 
             for (int i = 0; i < quantity; ++i)
             {
-                GameObject rata = Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
+                Instantiate(rataPrefab, rataGO.transform).GetComponent<Separacion>().targEmpty = rataGO;
             }
 
             numRats += quantity;
