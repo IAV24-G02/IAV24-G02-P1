@@ -121,17 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff165d9358587c146b7cc6e66cbdba1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peso: 0.5
+  peso: 1
   prioridad: 1
-  objetivo: {fileID: 4907788568862894593, guid: dba858e7817df634d8619cbb6591a683,
-    type: 3}
-  targetRadius: 0
-  slowRadius: 0
+  objetivo: {fileID: 0}
+  targetRadius: 0.16
+  slowRadius: 0.1
   timeToTarget: 0.1
-  wanderOffset: 0
-  wanderRadius: 0
-  wanderRate: 0
-  maxAcceleration: 0
+  wanderOffset: 0.53
+  wanderRadius: 0.61
+  wanderRate: 0.99
+  maxAcceleration: 0.36
+  intervalo: 1
 --- !u!114 &-317693632321659350
 MonoBehaviour:
   m_ObjectHideFlags: 0

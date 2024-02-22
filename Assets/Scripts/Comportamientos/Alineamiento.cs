@@ -21,14 +21,14 @@ namespace UCM.IAV.Movimiento
 
         protected Direccion lastDir = new Direccion();
 
-		private float maxAngularAcceleration;
-		private float maxRotation;
+		private float maxAngularAcceleration = 2;
+		private float maxRotation = 2;
 
         [SerializeField]
-        private float targetRadius;
+        private float targetRadius = 2;
 
         [SerializeField]
-        private float slowRadius;
+        private float slowRadius = 0.1f;
 
         [SerializeField]
         private float timeToTarget = 0.1f;
@@ -49,7 +49,9 @@ namespace UCM.IAV.Movimiento
 
 
         public override Direccion GetDireccion()
-		{ 
+		{
+			Debug.Log("Meordeo 3");
+
 			Agente objetivoAgente = objetivo.GetComponent<Agente>();
 			float rotation = objetivoAgente.orientacion - agente.orientacion;
 

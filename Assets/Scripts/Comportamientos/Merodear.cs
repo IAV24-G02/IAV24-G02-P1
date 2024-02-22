@@ -21,120 +21,70 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Merodear : Encarar
     {
-        //[SerializeField]
-        //float tiempoMaximo = 2.0f;
-
-        //[SerializeField]
-        //float tiempoMinimo = 1.0f;
-
-        //float t = 3.0f;
-        //float actualT = 2.0f;
-
-        //Direccion lastDir = new Direccion();
-
+        //Radio del círculo de merodeo.
         [SerializeField]
         private float wanderOffset;
 
+        //Distancia del agente a la que se encuentra el círculo de merodeo.
         [SerializeField]
         private float wanderRadius;
 
+        //Ratio máximo que puede cambiar el merodeo en cada ciclo.
         [SerializeField]
         private float wanderRate;
 
+        //Máxima aceleración que el agente puede adquirir.
         [SerializeField]
         private float maxAcceleration;
-		
-		private float wanderOrientation;
 
-        private static int randomBinomial()
-        {
-            // Usar el generador de números aleatorios de Unity
-            float randomNumber = Random.Range(0f, 1f);
-            return (randomNumber > 0.5f) ? 1 : -1;
-        }
+        //Objetivo de merodeo del agente.
+        private Vector3 wanderTarget = new Vector3(0,0,0);
 
-		private Vector3 radiansAsVector(float orientation)
-		{
-			//sin(o) = x cos(o) = z;
-			return new Vector3(Mathf.Sin(orientation), 0, Mathf.Cos(orientation));
-		}
-
+        //Valores necesarios para crear los ciclos de actualización de merodeo.
+        public float intervalo = 1f; // Intervalo en segundos entre cada ejecución de la acción
+        private float tiempoTranscurrido = 0f;
         public override Direccion GetDireccion()
-		{
+        {
 
-			float targetOrientation;
-			Vector3 targetPosition;
+            Vector3 targetOrientation;
 
-			wanderOrientation += randomBinomial() * wanderRate;
+            Direccion sol = new Direccion();
 
-			targetOrientation = wanderOrientation + agente.orientacion;
+            tiempoTranscurrido += Time.deltaTime;
 
-			targetPosition = radiansAsVector(agente.orientacion);
+            if (tiempoTranscurrido >= intervalo)
+            {
+                // Resetea el temporizador
+                tiempoTranscurrido -= intervalo;
 
-			objetivo.transform.position = transform.position + wanderOffset * targetPosition;
+                //A donde mira la rata
+                Vector3 delante = agente.transform.forward;
 
-            targetPosition = radiansAsVector(targetOrientation);
+                // Calculando la dirección opuesta (hacia atrás)
+                Vector3 atras = -delante;
 
-            objetivo.transform.position += wanderRadius * targetPosition;
+                // Normalizando la dirección y escalándola por la distancia deseada
+                Vector3 wanderDirection = atras.normalized * 3;
 
-            Direccion sol = base.GetDireccion();
+                // Obteniendo la posición de merodeo
+                Vector3 posicionMerodeo = agente.transform.position + wanderDirection;
 
-            targetPosition = radiansAsVector(agente.orientacion);
+                //Actualiza la orientación de merodeo
+                wanderTarget = posicionMerodeo;
+                wanderTarget += new Vector3(Random.Range(-360, 360), 0, Random.Range(-360, 360)) * wanderRate;
 
-			sol.lineal = maxAcceleration * targetPosition;
+                //Calcula la orientacion combinada objetivo
+                targetOrientation = wanderTarget + agente.transform.rotation.eulerAngles;
+                //Calcula el centro del círculo de merodeo
+                wanderTarget = agente.transform.position + wanderOffset * agente.transform.rotation.eulerAngles;
+                //Calcula la localización objetivo.
+                wanderTarget += wanderRadius * targetOrientation;
 
-			lastDir = sol;
-
+                //Establece la aceleración linear para que vaya a toda la velocidad posible en la dirección elegida.
+                sol.lineal = new Vector3(maxAcceleration * wanderTarget.x, 0, maxAcceleration * wanderTarget.z);
+            }
             return sol;
-
         }
-
-        /*
-
-			function getSteering()-> SteeringOutput:
-				# 1. Calculate the target to delegate to face
-				# Update the wander orientation.
-				wanderOrientation += randomBinomial() * wanderRate
-
-				# Calculate the combined target orientation.
-				targetOrientation = wanderOrientation + character.orientation
-				# Calculate the center of the wander circle.
-				target = character.position + wanderOffset * character.orientation.asVector()
-				#Calculate the target location.
-				target += wanderRadius * targetOrientation.asVector()
-
-				# 2. Delegate to face.
-				result = Face.getSteering()
-
-				# 3. Now set the linear acceleration to be at full
-				# acceleration in the direction of the orientation. 
-				result.linear = maxAcceleration * character. orientation.asVector()
-
-				# Return it. 
-				return result
-         */
-
 
     }
 }
-
-/*
-  class Wander extends Face:
-				# The radius and forward offset of the wander circle.
-				wanderOffset: float
-				wanderRadius: float
-																									
-				# The maximum rate at which the wander orientation can change. 
-				wanderRate: float
-
-				# The current orientation of the wander target. 
-				wanderOrientation: float
-		
-				# The maximum acceleration of the character. 
-				maxAcceleration: float
-
-				# Again we don't need a new target.
-				#... Other data is derived from the superclass
-  
- 
- */
