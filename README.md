@@ -185,11 +185,16 @@ Se podría modificar un poco más haciendo que solo compruebe dentro de un radio
 
 ```
 # Radius or range with respect to the character
-fleeRange: float
+fleeRange (radius): float
+
+# Number of targets in radius
+count: int
 
 for target in targets:
     if (character.position - target.position).length() <= fleeRange:
         averagePosition += target.position
+		count++
+averagePosition /= count
 ```
 
 D. El merodeo de las `Ratas` en ausencia de la música emanada por la flauta viene implementado haciendo uso de tres algoritmos distintos en relación de herencia.
@@ -343,7 +348,7 @@ class Separacion:
  	targets: Kinematic[]
 
  	# The threshold to take action.
- 	threshold: float
+ 	threshold (radius): float
 
  	# The constant coefficient of decay for the inverse square law.
  	decayCoefficient: float
@@ -368,7 +373,7 @@ class Separacion:
  		return result
 ```
 
-Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (umbral) actúa una especie de fuerza de repulsión. Esto hará que las `Ratas` no lleguen a agolparse en el mismo punto evitando colisiones indeseadas.
+Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_. En el caso de que la _distance_ (distancia) sea menor que _threshold_ (radio) actúa una especie de fuerza de repulsión. Esto hará que las `Ratas` no lleguen a agolparse en el mismo punto evitando colisiones indeseadas.
 
 ## Pruebas y métricas
 
@@ -396,18 +401,18 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 
 ## Ampliaciones
 
-Se ha realizado la ampliación de los quesos. Consiste en que el player puede instanciar hasta un número concreto de quesos los cuáles hacen que las ratas cuando están a una determinada distancia de algún queso van a por él, y una vez llegan se lo "come". El pseudocódigo, parecido al de HuirDeUnGrupo, es el siguiente:
+Se ha realizado la ampliación de los quesos. Consiste en que el `Avatar` puede instanciar hasta un número concreto de quesos los cuáles hacen que las `Ratas`, cuando están a una determinada distancia de algún queso, van a por él, y una vez llegan se lo "come". El pseudocódigo (parecido al de HuirDeUnGrupo) es el siguiente:
 
 class SeguirQueso:
     character: Static
     # List of targets.
     targets: Static[]
 
-	# Counter
+	# Counter for the number of targets in radius
 	count: int
 
 	# The threshold to take action.
- 	threshold: float
+ 	threshold (radius): float
 
     maxSpeed: float
 
@@ -422,11 +427,12 @@ class SeguirQueso:
 				count++
 			if distance < 1.0f 
 				destroy
+
 		if count > 0
-        	averagePosition /= len(targets)
+        	averagePosition /= count
 
         	# Obtain the direction to move from the average point of the targets.
-        	result.velocity = averagePosition - character.position  
+        	result.velocity = averagePosition - character.position
 
         	# The velocity is along this direction, at full speed.
         	result.velocity.normalize()
