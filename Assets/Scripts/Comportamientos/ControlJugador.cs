@@ -19,6 +19,8 @@ namespace UCM.IAV.Movimiento
     {
         #region references
         ScreenToWorld screenToWorld;
+        [SerializeField]
+        private GameObject cheese;
         #endregion
         #region properties
         Vector3 worldPoint;
@@ -44,7 +46,13 @@ namespace UCM.IAV.Movimiento
                 direccion.lineal.x = Input.GetAxis("Horizontal");
                 direccion.lineal.z = Input.GetAxis("Vertical");
             }
-            
+            // Cheese           
+            if(screenToWorld != null && Input.GetMouseButtonDown(2))
+            {
+                Vector3 offset = new Vector3(0, 1, 0);
+                Vector3 cheesePos = screenToWorld.ScreenToWorldPoint(Input.mousePosition);
+                Instantiate(cheese, cheesePos + offset, Quaternion.identity);
+            }
             // Resto de cálculo de movimiento
             direccion.lineal.Normalize();
             direccion.lineal *= agente.aceleracionMax;
