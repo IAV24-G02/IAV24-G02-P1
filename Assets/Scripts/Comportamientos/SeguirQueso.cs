@@ -6,17 +6,20 @@ namespace UCM.IAV.Movimiento
 {
     public class SeguirQueso : ComportamientoAgente
     {
+        #region references
+        private GestorJuego gestor = null;
+        #endregion
         #region properties
         Transform myTransform;
         [SerializeField]
-        private float radio = 4.0f;    
+        private float radio = 5.0f;    
         #endregion
 
         public override Direccion GetDireccion()
         {
             Direccion direccion = new Direccion();
             int quesosContados = 0;
-            Vector3 averagePosition = Vector3.zero;           
+            Vector3 averagePosition = Vector3.zero;
             for (int i = 0; i < objetivo.transform.childCount; i++)
             {
                 Vector3 quesoPosition = objetivo.transform.GetChild(i).position;
@@ -27,7 +30,7 @@ namespace UCM.IAV.Movimiento
                 }
                 if (Vector3.Distance(myTransform.position, quesoPosition) < 1.0f)
                 {
-                    Destroy(objetivo.transform.GetChild(i).gameObject);
+                    gestor.DespawnCheese(objetivo.transform.GetChild(i).gameObject);
                 }
             }
 
@@ -38,17 +41,21 @@ namespace UCM.IAV.Movimiento
                 direccion.lineal.Normalize();
                 direccion.lineal *= agente.aceleracionMax;              
             }
+
             return direccion;
         }
 
         void Start()
         {           
             objetivo = GameObject.Find("Quesos");
+            GameObject gJ = GameObject.Find("GestorJuego");
+            if (gJ != null)
+            {
+                gestor = gJ.GetComponent<GestorJuego>();
+            }
             myTransform = GetComponent<Transform>();
         }
-    }
-
-   
+    }  
 }
 
 

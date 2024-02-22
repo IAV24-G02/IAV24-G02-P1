@@ -23,8 +23,6 @@ namespace UCM.IAV.Movimiento
         private float radio = 3.0f;
         [SerializeField]
         GameObject rats;
-        [SerializeField]
-        private float distanciaDeteccion = 5.0f;
         #endregion
         #region references
         private Transform myTransform;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144771709064956860}
   - component: {fileID: 144771709064956863}
+  - component: {fileID: 6751609558489708106}
   m_Layer: 0
   m_Name: GestorJuego
   m_TagString: Untagged
@@ -24,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144771709064956862}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &144771709064956863
 MonoBehaviour:
@@ -43,3 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c285827bcb0749c489edf5de9eb92770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenario: {fileID: 0}
+  rataPrefab: {fileID: 4131845400584305642, guid: 5175d5736886518439bf9a2956a122b4,
+    type: 3}
+  cheesePrefab: {fileID: 2258030687734341890, guid: 9e6bbbdcd5a7260439f325228f1ab15a,
+    type: 3}
+  fRText: {fileID: 0}
+  ratText: {fileID: 0}
+  input: {fileID: 0}
+  cheeseText: {fileID: 0}
+  maxCheese: 10
+--- !u!114 &6751609558489708106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144771709064956862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d90f3ca303af9498630dcac1808827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 100

@@ -13,6 +13,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialiasing;
 
 namespace UCM.IAV.Movimiento
 {
@@ -27,8 +28,7 @@ namespace UCM.IAV.Movimiento
         GameObject rataPrefab = null;
 
         [SerializeField]
-        GameObject perro = null;
-        HuirDeUnGrupo perroHuir = null;
+        private GameObject cheesePrefab;
 
         // textos UI
         [SerializeField]
@@ -37,8 +37,15 @@ namespace UCM.IAV.Movimiento
         Text ratText;
         [SerializeField]
         TMP_InputField input;
+        [SerializeField]
+        Text cheeseText;
 
+        [SerializeField]
+        private int maxCheese = 10;
+
+        private ScreenToWorld screenToWorld = null;
         private GameObject rataGO = null;
+        private GameObject cheeses = null;
         private int frameRate = 60;
 
         // Variables de timer de framerate
@@ -48,6 +55,7 @@ namespace UCM.IAV.Movimiento
         float m_refreshTime = 0.5f;
 
         private int numRats;
+        int currentCheese = 0;
 
         private bool cameraPerspective = true;
         private void Awake()
@@ -77,18 +85,22 @@ namespace UCM.IAV.Movimiento
             rataGO = GameObject.Find("Ratas");
             ratText = GameObject.Find("NumRats").GetComponent<Text>();
             fRText = GameObject.Find("Framerate").GetComponent<Text>();
+            cheeseText = GameObject.Find("Cheeses").GetComponent<Text>();
             numRats = rataGO.transform.childCount;
             ratText.text = numRats.ToString();
+            cheeseText.text = (maxCheese - currentCheese).ToString();
         }
 
         // Se llama para poner en marcha el gestor
         private void Start()
         {
+            screenToWorld = GetComponent<ScreenToWorld>();
             rataGO = GameObject.Find("Ratas");
+            cheeses = GameObject.Find("Quesos");
             Application.targetFrameRate = frameRate;
             numRats = rataGO.transform.childCount;
             ratText.text = numRats.ToString();
-            perroHuir = perro.GetComponent<HuirDeUnGrupo>();
+            cheeseText.text = (maxCheese - currentCheese).ToString();
         }
 
         // Se llama cuando el juego ha terminado
@@ -133,6 +145,8 @@ namespace UCM.IAV.Movimiento
             if (Input.GetKeyDown(KeyCode.Return) || 
                 Input.GetKeyDown(KeyCode.KeypadEnter))
                 EnterInput();
+            if (Input.GetMouseButtonDown(2))
+                SpawnCheese();
         }
 
         private void Restart()
@@ -236,6 +250,26 @@ namespace UCM.IAV.Movimiento
             {
                 Debug.Log("Por favor, ingresa un número válido.");
             }
+        }
+
+        private void SpawnCheese()
+        {
+            if (currentCheese < maxCheese && screenToWorld != null)
+            {
+                Vector3 offset = new Vector3(0, 1, 0);
+                Vector3 cheesePos = screenToWorld.ScreenToWorldPoint(Input.mousePosition);
+                Instantiate(cheesePrefab, cheesePos + offset, Quaternion.identity, cheeses.transform);
+                currentCheese++;
+                cheeseText.text = (maxCheese - currentCheese).ToString();
+            }
+        }
+
+        public void DespawnCheese(GameObject obj)
+        {
+            if (obj == null)
+                return;
+
+            Destroy(obj);
         }
     }
 }

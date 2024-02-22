@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3726318188477029435}
   m_Layer: 0
   m_Name: Cheese
-  m_TagString: Untagged
+  m_TagString: Queso
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2258030687734341890}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11952878, y: 0.1262629, z: -0.07387796, w: 0.9819942}
+  m_LocalRotation: {x: -0.15718412, y: 0.11790826, z: -0.013822954, w: 0.98040795}
   m_LocalPosition: {x: -0.041876, y: -0.059312, z: -0.12833}
   m_LocalScale: {x: 26.638, y: 26.638, z: 26.638}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -12.48, y: 15.787, z: -10.342}
+  m_LocalEulerAnglesHint: {x: -17.755, y: 14.319, z: -3.864}
 --- !u!33 &2176432354112235186
 MeshFilter:
   m_ObjectHideFlags: 0

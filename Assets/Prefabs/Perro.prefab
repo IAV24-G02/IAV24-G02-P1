@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3861295050334874268}
   - component: {fileID: 3861295050334874259}
   - component: {fileID: 3861295050334874258}
+  - component: {fileID: 2885041077448673957}
+  - component: {fileID: 5382108098046212292}
   m_Layer: 0
   m_Name: Perro
   m_TagString: Untagged
@@ -26,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861295050334874256}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.035, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5977170053187502082}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &3861295050334874268
 SphereCollider:
@@ -43,9 +45,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861295050334874256}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.6006769
   m_Center: {x: 0, y: 0.5591502, z: -0.3148517}
 --- !u!54 &3861295050334874259
@@ -55,10 +65,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861295050334874256}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -76,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27b1398245256a4aa176c4cad05e629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combinarPorPeso: 1
-  combinarPorPrioridad: 0
+  combinarPorPeso: 0
+  combinarPorPrioridad: 1
   umbralPrioridad: 0.2
   velocidadMax: 15
   rotacionMax: 5
@@ -86,6 +107,43 @@ MonoBehaviour:
   velocidad: {x: 0, y: 0, z: 0}
   rotacion: 0
   orientacion: 0
+--- !u!114 &2885041077448673957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3861295050334874256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0c5073ef546042b3ba1dd5b02498a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 0.5
+  prioridad: 1
+  objetivo: {fileID: 0}
+  distancia: 3
+  acelMaxima: 3
+  velMaxima: 2
+  rObjetivo: 4
+  rRalentizado: 8
+--- !u!114 &5382108098046212292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3861295050334874256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6510102c3021340883d81607cd8884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 0}
+  radio: 4
+  rats: {fileID: 0}
 --- !u!1 &5977170053187502081
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,13 +171,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977170053187502081}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4529992095953285162}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5977170053187502093
 MeshFilter:
@@ -173,7 +231,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &5977170053187502083
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -190,7 +248,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5977170053187502094
 MonoBehaviour:
   m_ObjectHideFlags: 0
