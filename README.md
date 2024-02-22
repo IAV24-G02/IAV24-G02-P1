@@ -396,7 +396,44 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 
 ## Ampliaciones
 
-No se han realizado ampliaciones hasta el momento.
+Se ha realizado la ampliación de los quesos. Consiste en que el player puede instanciar hasta un número concreto de quesos los cuáles hacen que las ratas cuando están a una determinada distancia de algún queso van a por él, y una vez llegan se lo "come". El pseudocódigo, parecido al de HuirDeUnGrupo, es el siguiente:
+
+class SeguirQueso:
+    character: Static
+    # List of targets.
+    targets: Static[]
+
+	# Counter
+	count: int
+
+	# The threshold to take action.
+ 	threshold: float
+
+    maxSpeed: float
+
+    function getSteering() -> KinematicSteeringOutput:
+        result = new KinematicSteeringOutput()
+
+        # Calculate the average point of all targets.
+        averagePosition = new Vector()
+        for target in targets:
+			if distance < threshold
+            	averagePosition += target.position
+				count++
+			if distance < 1.0f 
+				destroy
+		if count > 0
+        	averagePosition /= len(targets)
+
+        	# Obtain the direction to move from the average point of the targets.
+        	result.velocity = averagePosition - character.position  
+
+        	# The velocity is along this direction, at full speed.
+        	result.velocity.normalize()
+        	result.velocity *= maxSpeed
+
+        return result
+```
 
 ## Producción
 
@@ -417,7 +454,7 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 |  |  OPCIONALES  | |
 |  | Generador pseudoaleatorio | ..-..-2024 |
 |  | Competición de flautistas | ..-..-2024 |
-|  | Distracción de las `Ratas` con trozos de queso | ..-..-2024 |
+| ✔ | Distracción de las `Ratas` con trozos de queso | 22-02-2024 |
 |  | Percepción del `Perro` mediante la vista | ..-..-2024 |
 |  | Evasión de los obstáculos mediante la vista | ..-..-2024 |
 |  | Menú | ..-..-2024 |

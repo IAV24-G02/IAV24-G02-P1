@@ -24,8 +24,7 @@ namespace UCM.IAV.Movimiento
         [SerializeField]
         GameObject cheeseContainer;
         #endregion
-        #region properties
-        Transform myTransform;
+        #region properties       
         Vector3 worldPoint;
         int currentCheese = 0;
         [SerializeField]
@@ -63,6 +62,7 @@ namespace UCM.IAV.Movimiento
                 Instantiate(cheese, cheesePos + offset, Quaternion.identity, cheeseContainer.transform);
                 currentCheese++;
             }
+            
             #endregion
 
             // Resto de cálculo de movimiento
@@ -73,8 +73,7 @@ namespace UCM.IAV.Movimiento
         }
 
         void Start()
-        {
-            myTransform = GetComponent<Transform>();
+        {           
             screenToWorld = GetComponent<ScreenToWorld>();
         }
     }

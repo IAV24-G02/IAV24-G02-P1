@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4927080821577829587}
   - component: {fileID: -317693632321659350}
   - component: {fileID: 1082186374365858194}
+  - component: {fileID: 1693009541783173604}
   m_Layer: 0
   m_Name: Rata
   m_TagString: Untagged
@@ -170,6 +171,24 @@ MonoBehaviour:
   velMaxima: 2
   rObjetivo: 6
   rRalentizado: 15
+--- !u!114 &1693009541783173604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131845400584305642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713799d8b452e4e41b6467dcf193edc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 0}
+  cheeseContainer: {fileID: 0}
+  maxCheese: 5
+  radio: 3
 --- !u!1 &8741895683886266571
 GameObject:
   m_ObjectHideFlags: 0
