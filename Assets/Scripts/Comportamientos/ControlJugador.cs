@@ -22,6 +22,7 @@ namespace UCM.IAV.Movimiento
         ScreenToWorld screenToWorld;
         #endregion
 
+        #region methods
         /// <summary>
         /// Obtiene la dirección
         /// </summary>
@@ -54,5 +55,6 @@ namespace UCM.IAV.Movimiento
         {
             screenToWorld = GetComponent<ScreenToWorld>();
         }
+        #endregion
     }
 }

@@ -9,18 +9,16 @@
    Contacto: email@federicopeinado.com
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace UCM.IAV.Movimiento
-{
+{  
     /// <summary>
     /// Clase para modelar el comportamiento de WANDER a otro agente
     /// </summary>
     public class Merodear : Encarar
     {
+        #region parameters
         //Radio del círculo de merodeo.
         [SerializeField]
         private float wanderOffset;
@@ -36,13 +34,18 @@ namespace UCM.IAV.Movimiento
         //Máxima aceleración que el agente puede adquirir.
         [SerializeField]
         private float maxAcceleration;
+        #endregion
 
+        #region properties
         //Objetivo de merodeo del agente.
         private Vector3 wanderTarget = new Vector3(0,0,0);
 
         //Valores necesarios para crear los ciclos de actualización de merodeo.
         public float intervalo = 1f; // Intervalo en segundos entre cada ejecución de la acción
         private float tiempoTranscurrido = 0f;
+        #endregion
+
+        #region methods
         public override Direccion GetDireccion()
         {
 
@@ -85,6 +88,7 @@ namespace UCM.IAV.Movimiento
             }
             return sol;
         }
+        #endregion
 
     }
 }

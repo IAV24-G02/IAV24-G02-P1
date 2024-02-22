@@ -8,7 +8,6 @@
    Autor: Laura Wang Qiu
    Contacto: yiwang03@ucm.es
 */
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UCM.IAV.Movimiento
@@ -26,6 +25,7 @@ namespace UCM.IAV.Movimiento
         private Transform myTransform = null;
         #endregion
 
+        #region methods
         /// <summary>
         /// Obtiene la dirección
         /// </summary>
@@ -66,5 +66,6 @@ namespace UCM.IAV.Movimiento
             myTransform = GetComponent<Transform>();
             objetivo = GameObject.Find("Ratas");
         }
+        #endregion
     }
 }

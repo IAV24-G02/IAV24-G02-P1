@@ -8,9 +8,7 @@
    Autor: Ignacio Ligero
    Contacto: iligero@ucm.es
 */
-using UCM.IAV.Movimiento;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace UCM.IAV.Movimiento
 {

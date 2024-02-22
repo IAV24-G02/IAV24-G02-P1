@@ -8,30 +8,33 @@
    Autor: Ignacio Ligero
    Contacto: iligero@ucm.es
 */
-using System.Collections;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UCM.IAV.Movimiento
 {
     public class Separacion : ComportamientoAgente
     {
-        public float maxAcceleration;
-
-        // Entidades potenciales de las que huir
-        public GameObject targEmpty;
+        #region parameters
+        [SerializeField]
+        private float maxAcceleration;
 
         // Umbral en el que se activa
         [SerializeField]
-        float umbral;
-
+        private float umbral;
         // Coeficiente de reducción de la fuerza de repulsión
         [SerializeField]
-        float decayCoefficient;
+        private float decayCoefficient;
+        #endregion
+
+        #region references
+        // Entidades potenciales de las que huir
+        public GameObject targEmpty;
 
         private GameObject[] targets;
+        #endregion
 
+        #region methods
         /// <summary>
         /// Separa al agente
         /// </summary>
@@ -41,12 +44,9 @@ namespace UCM.IAV.Movimiento
             int numRatas = targEmpty.transform.childCount;
             targets = new GameObject[numRatas];
 
-            // targEmpty = transform.parent.gameObject;
-
             for (int i = 0; i < numRatas; i++)
             {
-                targets[i] = targEmpty.transform.GetChild(i).gameObject;
-                //Debug.Log(targets[i].transform.position);
+                targets[i] = targEmpty.transform.GetChild(i).gameObject;             
             }
 
             Direccion result = new Direccion();
@@ -72,12 +72,12 @@ namespace UCM.IAV.Movimiento
                     // Añade la aceleración
                     direccion.Normalize();
                     result.lineal += strength * direccion;
-
-                    // Debug.Log(result.lineal);
+                   
                 }
             }
 
             return result;
         }
+        #endregion
     }
 }

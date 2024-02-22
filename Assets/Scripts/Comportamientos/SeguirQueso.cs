@@ -8,9 +8,8 @@
    Autore: Laura Wang Qiu & Agustín Castro de Troya
    Contacto: yiwang03@ucm.es | acastrod@ucm.es
 */
-using UCM.IAV.Movimiento;
+
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace UCM.IAV.Movimiento
 {
@@ -27,6 +26,7 @@ namespace UCM.IAV.Movimiento
         private Transform myTransform = null;
         #endregion
 
+        #region methods
         public override Direccion GetDireccion()
         {
             Direccion direccion = new Direccion();
@@ -67,7 +67,8 @@ namespace UCM.IAV.Movimiento
             }
             myTransform = GetComponent<Transform>();
         }
-    }  
+        #endregion
+    }
 }
 
 

@@ -8,7 +8,6 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +15,11 @@ namespace UCM.IAV.Movimiento
 {
     public class TocarFlauta : MonoBehaviour
     {
+        #region parameters
         public float radio = 5f;
+        #endregion
 
+        #region references
         private List<GameObject> rats = new List<GameObject>();
 
         public GameObject efectoParticulaSuelo;
@@ -26,12 +28,15 @@ namespace UCM.IAV.Movimiento
         private GameObject particleAire = null;
 
         private SphereCollider trigger;
-        bool isActive = false;
-        //[SerializeField]
-        //Separacion perroSepar;
-
         private AudioSource myAudio;
+        #endregion
 
+        #region porperties
+        bool isActive = false;
+
+        #endregion
+
+        #region methods
         // Start is called before the first frame update
         void Start()
         {
@@ -108,8 +113,7 @@ namespace UCM.IAV.Movimiento
             // Activamos o desactivamos los comportamientos que ocurren si se toca la flauta
             rat.GetComponent<Merodear>().enabled = false;
 
-            rat.GetComponent<Separacion>().enabled = true;
-            //perroSepar.enabled = true;
+            rat.GetComponent<Separacion>().enabled = true;           
 
             Llegada l = rat.GetComponent<Llegada>();
 
@@ -123,8 +127,7 @@ namespace UCM.IAV.Movimiento
             // Activamos o desactivamos los comportamientos que ocurren si no se toca la flauta
             rat.GetComponent<Merodear>().enabled = true;
             rat.GetComponent<Llegada>().enabled = false;
-            rat.GetComponent<Separacion>().enabled = false;
-            //perroSepar.enabled = false;
+            rat.GetComponent<Separacion>().enabled = false;           
         }
 
         private void activateParticle(ref GameObject particle, ref GameObject efecto)
@@ -136,11 +139,12 @@ namespace UCM.IAV.Movimiento
         private void destroyParticle(ref GameObject particle)
         {
             if (particle != null)
-            { // desactivamos las part�culas
+            { // desactivamos las particulas
                 particle.transform.parent = null;
                 Destroy(particle);
                 particle = null;
             }
         }
+        #endregion
     }
 }

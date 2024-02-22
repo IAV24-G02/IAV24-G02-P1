@@ -65,6 +65,7 @@ namespace UCM.IAV.Movimiento
         private bool cameraPerspective = true;
         #endregion
 
+        #region methods
         private void Awake()
         {
             // Para que el gestor del juego no se destruya entre escenas
@@ -271,5 +272,6 @@ namespace UCM.IAV.Movimiento
 
             Destroy(obj);
         }
+        #endregion
     }
 }
