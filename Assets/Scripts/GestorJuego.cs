@@ -19,45 +19,52 @@ namespace UCM.IAV.Movimiento
 {
     public class GestorJuego : MonoBehaviour
     {
-        public static GestorJuego instance = null;
-
-        [SerializeField]
-        GameObject scenario = null;
-
-        [SerializeField]
-        GameObject rataPrefab = null;
-
-        [SerializeField]
-        private GameObject cheesePrefab;
-
-        // textos UI
-        [SerializeField]
-        Text fRText;   
-        [SerializeField]
-        Text ratText;
-        [SerializeField]
-        TMP_InputField input;
-        [SerializeField]
-        Text cheeseText;
-
+        #region parameters
         [SerializeField]
         private int maxCheese = 10;
-
+        #endregion
+        #region properties
+        public static GestorJuego instance = null;
         private ScreenToWorld screenToWorld = null;
+        #endregion
+        #region references
+        // Prefabs
+        [SerializeField]
+        private GameObject scenario = null;
+        [SerializeField]
+        private GameObject rataPrefab = null;
+        [SerializeField]
+        private GameObject cheesePrefab = null;
+
+        // Textos UI
+        [SerializeField]
+        private Text fRText;
+        [SerializeField]
+        private Text ratText;
+        [SerializeField]
+        private TMP_InputField input;
+        [SerializeField]
+        private Text cheeseText;
+
+        // GameObject Padres de listas
         private GameObject rataGO = null;
         private GameObject cheeses = null;
-        private int frameRate = 60;
 
         // Variables de timer de framerate
-        int m_frameCounter = 0;
-        float m_timeCounter = 0.0f;
-        float m_lastFramerate = 0.0f;
-        float m_refreshTime = 0.5f;
+        private int frameRate = 60;
+        private int m_frameCounter = 0;
+        private float m_timeCounter = 0.0f;
+        private float m_lastFramerate = 0.0f;
+        private float m_refreshTime = 0.5f;
 
-        private int numRats;
-        int currentCheese = 0;
+        // Ratas y Quesos
+        private int numRats = 0;
+        private int currentCheese = 0;
 
+        // Cámara
         private bool cameraPerspective = true;
+        #endregion
+
         private void Awake()
         {
             // Para que el gestor del juego no se destruya entre escenas
@@ -109,7 +116,6 @@ namespace UCM.IAV.Movimiento
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-
         // Update is called once per frame
         void Update()
         {
@@ -129,7 +135,7 @@ namespace UCM.IAV.Movimiento
             // Texto con el framerate y 2 decimales
             fRText.text = (((int)(m_lastFramerate * 100 + .5) / 100.0)).ToString();
 
-            //Input
+            // Input
             if (Input.GetKeyDown(KeyCode.R))
                 Restart();
             if (Input.GetKeyDown(KeyCode.T))
@@ -234,8 +240,6 @@ namespace UCM.IAV.Movimiento
             bool isValid = int.TryParse(input.text, out inputRats);
             if (isValid && inputRats >= 0)
             {
-                Debug.Log("Número válido: " + inputRats);
-
                 int difference = Mathf.Abs(numRats - inputRats);
                 if (inputRats > numRats)
                 {
@@ -245,10 +249,6 @@ namespace UCM.IAV.Movimiento
                 {
                     DespawnRata(difference);
                 }
-            }
-            else
-            {
-                Debug.Log("Por favor, ingresa un número válido.");
             }
         }
 

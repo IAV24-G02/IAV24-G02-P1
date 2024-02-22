@@ -1,3 +1,13 @@
+/*    
+   Copyright (C) 2024 Laura Wang Qiu & Agustín Castro de Troya
+   http://www.github.com/LauraWangQiu | http://www.github.com/AgusCDT
+
+   Este fichero forma parte del material de la asignatura Inteligencia Artificial para Videojuegos.
+   Esta asignatura se imparte en la Facultad de Informática de la Universidad Complutense de Madrid (España).
+
+   Autore: Laura Wang Qiu & Agustín Castro de Troya
+   Contacto: yiwang03@ucm.es | acastrod@ucm.es
+*/
 using UCM.IAV.Movimiento;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,13 +16,15 @@ namespace UCM.IAV.Movimiento
 {
     public class SeguirQueso : ComportamientoAgente
     {
+        #region parameters
+        [SerializeField]
+        private float radio = 5.0f;
+        #endregion
         #region references
         private GestorJuego gestor = null;
         #endregion
         #region properties
-        Transform myTransform;
-        [SerializeField]
-        private float radio = 5.0f;    
+        private Transform myTransform = null;
         #endregion
 
         public override Direccion GetDireccion()

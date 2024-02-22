@@ -8,7 +8,6 @@
    Autor: Ignacio Ligero
    Contacto: iligero@ucm.es
 */
-
 using UCM.IAV.Movimiento;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,31 +22,17 @@ namespace UCM.IAV.Movimiento
         #region references
         private Rigidbody rigidbody; // rigidbody del agente
         #endregion
-
         #region parameters
         public float distancia; // distancia entre objetivo-agente
         public float acelMaxima; // aceleración máxima alcanzable del agente
         public float velMaxima; // velocidad máxima alcanzable del agente
-
         [SerializeField]
         private float rObjetivo; // radio para llegar al objetivo
-
         [SerializeField]
         private float rRalentizado; // radio en el que empieza a ralentizarse
-
-        private float timeToTarget = 0.1f; // tiempo en conseguir la aceleración objetivo
         #endregion
 
         #region methods
-        /// <summary>
-        /// Inicialización de las referencias y parámetros
-        /// </summary>
-        public void Start()
-        {
-            objetivo = GameObject.Find("Avatar");
-            rigidbody = agente.GetComponent<Rigidbody>();
-        }
-
         /// <summary>
         /// Obtención de la dirección
         /// </summary>
@@ -78,6 +63,15 @@ namespace UCM.IAV.Movimiento
 
             // La aceleración intenta conseguir la velocidad objetivo
             return direccion;
+        }
+
+        /// <summary>
+        /// Inicialización de las referencias y parámetros
+        /// </summary>
+        public void Start()
+        {
+            objetivo = GameObject.Find("Avatar");
+            rigidbody = agente.GetComponent<Rigidbody>();
         }
         #endregion
     }

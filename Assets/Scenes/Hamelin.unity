@@ -2195,7 +2195,6 @@ MonoBehaviour:
   rotacionMax: 10
   aceleracionMax: 15
   aceleracionAngularMax: 10
-  "aceleraci\xF3n": {x: 0, y: 0, z: 0}
   velocidad: {x: 0, y: 0, z: 0}
   rotacion: 0
   orientacion: 0
@@ -6109,7 +6108,7 @@ PrefabInstance:
         type: 3}
       propertyPath: objetivo
       value: 
-      objectReference: {fileID: 919132148976998258}
+      objectReference: {fileID: 0}
     - target: {fileID: 5382108098046212292, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
       propertyPath: m_Enabled
