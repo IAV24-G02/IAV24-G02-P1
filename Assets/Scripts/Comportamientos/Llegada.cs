@@ -33,13 +33,9 @@ namespace UCM.IAV.Movimiento
         // El tiempo en el que conseguir la aceleracion objetivo
         private float timeToTarget = 0.1f;
 
-        // El RigidBody del objetivo
-        private Rigidbody rbObjetivo;
-
         public void Start()
         {
             objetivo = GameObject.Find("Avatar");
-            rbObjetivo = objetivo.GetComponent<Rigidbody>();
         }
 
         /// <summary>
@@ -75,7 +71,7 @@ namespace UCM.IAV.Movimiento
 
             // La aceleración intenta conseguir la velocidad objetivo
             Direccion sol = new Direccion();
-            sol.lineal = vObjetivo + rbObjetivo.velocity;
+            sol.lineal = vObjetivo;
             sol.lineal /= timeToTarget;
 
             // Comprueba si la aceleración es demasiado alta
