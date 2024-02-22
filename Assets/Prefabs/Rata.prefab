@@ -166,11 +166,11 @@ MonoBehaviour:
   peso: 0.7
   prioridad: 1
   objetivo: {fileID: 0}
-  distancia: 7
-  acelMaxima: 0.1
-  velMaxima: 2
-  rObjetivo: 6
-  rRalentizado: 15
+  distancia: 2
+  acelMaxima: 2
+  velMaxima: 6
+  rObjetivo: 2
+  rRalentizado: 8
 --- !u!114 &1693009541783173604
 MonoBehaviour:
   m_ObjectHideFlags: 0

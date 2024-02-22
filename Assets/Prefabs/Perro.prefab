@@ -124,7 +124,7 @@ MonoBehaviour:
   objetivo: {fileID: 0}
   distancia: 3
   acelMaxima: 3
-  velMaxima: 2
+  velMaxima: 4
   rObjetivo: 4
   rRalentizado: 8
 --- !u!114 &5382108098046212292

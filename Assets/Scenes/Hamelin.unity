@@ -1332,7 +1332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &406471538
@@ -2195,6 +2195,7 @@ MonoBehaviour:
   rotacionMax: 10
   aceleracionMax: 15
   aceleracionAngularMax: 10
+  "aceleraci\xF3n": {x: 0, y: 0, z: 0}
   velocidad: {x: 0, y: 0, z: 0}
   rotacion: 0
   orientacion: 0
@@ -6011,6 +6012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885041077448673957, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
+      propertyPath: velMaxima
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885041077448673957, guid: 5ff744207c6a5044ab297c8fc4814fc0,
+        type: 3}
       propertyPath: rRalentizado
       value: 5
       objectReference: {fileID: 0}
@@ -6022,7 +6028,7 @@ PrefabInstance:
     - target: {fileID: 3861295050334874258, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
       propertyPath: velocidadMax
-      value: 10
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 3861295050334874258, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
@@ -6104,6 +6110,11 @@ PrefabInstance:
       propertyPath: objetivo
       value: 
       objectReference: {fileID: 919132148976998258}
+    - target: {fileID: 5382108098046212292, guid: 5ff744207c6a5044ab297c8fc4814fc0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

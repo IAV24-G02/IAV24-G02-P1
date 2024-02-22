@@ -19,18 +19,18 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Llegada : ComportamientoAgente
     {
-        public float distancia = 7;
-
+        public float distancia;
+        private Rigidbody rigidbody;
         public float acelMaxima;
         public float velMaxima;
 
         // El radio para llegar al objetivo
         [SerializeField]
-        private float rObjetivo = 6.0f;
+        private float rObjetivo;
 
         // El radio en el que se empieza a ralentizarse
         [SerializeField]
-        private float rRalentizado = 15.0f;
+        private float rRalentizado;
 
         // El tiempo en el que conseguir la aceleracion objetivo
         private float timeToTarget = 0.1f;
@@ -38,6 +38,7 @@ namespace UCM.IAV.Movimiento
         public void Start()
         {
             objetivo = GameObject.Find("Avatar");
+            rigidbody = agente.GetComponent<Rigidbody>();
         }
 
         /// <summary>
@@ -49,36 +50,27 @@ namespace UCM.IAV.Movimiento
             // Consigue la dirección hacia el objetivo
             Direccion direccion = new Direccion();
             direccion.lineal = objetivo.transform.position - transform.position;
-            distancia = direccion.lineal.magnitude;          
-
+            distancia = direccion.lineal.magnitude;
+        
             // Comprueba si ya ha llegado
             if (distancia < rObjetivo)
-                velMaxima = 0.0f;
-
-            // Si estamos fuera del rRalentizado
+            {
+                direccion.lineal = Vector3.zero;
+                rigidbody.velocity = Vector3.zero;
+            }         
+            //Si estamos fuera del rRalentizado
             else if (distancia > rRalentizado)
-                velMaxima = agente.aceleracionMax; // entonces se mueve a velocidad máxima
+                velMaxima = agente.velocidadMax; // entonces se mueve a velocidad máxima
             // En otro caso calcula la velocidad en escala
             else
-                velMaxima = agente.aceleracionMax * distancia / rRalentizado;         
+                velMaxima = agente.velocidadMax * distancia / rRalentizado;
 
             // La velocidad objetivo combina velocidad y dirección
-            direccion.lineal = direccion.lineal * velMaxima;
-            direccion.lineal = direccion.lineal - agente.velocidad;
+            direccion.lineal.Normalize();
+            direccion.lineal *= velMaxima;
 
             // La aceleración intenta conseguir la velocidad objetivo
-
-            direccion.lineal = objetivo.transform.position - transform.position;
-            direccion.lineal /= timeToTarget;
-            // Comprueba si la aceleración es demasiado alta
-            if (direccion.lineal.magnitude > acelMaxima)
-            {
-                direccion.lineal.Normalize();
-                direccion.lineal *= agente.aceleracionMax;
-            }
-
-            direccion.angular = 0;
             return direccion;
-        }     
+        }
     }
 }
