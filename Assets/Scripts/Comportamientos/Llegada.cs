@@ -8,6 +8,7 @@
    Autor: Ignacio Ligero
    Contacto: iligero@ucm.es
 */
+
 using UCM.IAV.Movimiento;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,22 +20,26 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Llegada : ComportamientoAgente
     {
-        public float distancia;
-        private Rigidbody rigidbody;
-        public float acelMaxima;
-        public float velMaxima;
+        #region references & parameters
+        public float distancia; // distancia entre objetivo-agente
+        public float acelMaxima; // aceleración máxima alcanzable del agente
+        public float velMaxima; // velocidad máxima alcanzable del agente
 
-        // El radio para llegar al objetivo
         [SerializeField]
-        private float rObjetivo;
+        private float rObjetivo; // radio para llegar al objetivo
 
-        // El radio en el que se empieza a ralentizarse
         [SerializeField]
-        private float rRalentizado;
+        private float rRalentizado; // radio en el que empieza a ralentizarse
 
-        // El tiempo en el que conseguir la aceleracion objetivo
-        private float timeToTarget = 0.1f;
+        private float timeToTarget = 0.1f; // tiempo en conseguir la aceleración objetivo
 
+        private Rigidbody rigidbody; // rigidbody del agente
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Inicialización de las referencias y parámetros
+        /// </summary>
         public void Start()
         {
             objetivo = GameObject.Find("Avatar");
@@ -42,7 +47,7 @@ namespace UCM.IAV.Movimiento
         }
 
         /// <summary>
-        /// Obtiene la dirección
+        /// Obtención de la dirección
         /// </summary>
         /// <returns></returns>
         public override Direccion GetDireccion()
@@ -51,13 +56,13 @@ namespace UCM.IAV.Movimiento
             Direccion direccion = new Direccion();
             direccion.lineal = objetivo.transform.position - transform.position;
             distancia = direccion.lineal.magnitude;
-        
+
             // Comprueba si ya ha llegado
             if (distancia < rObjetivo)
             {
                 direccion.lineal = Vector3.zero;
                 rigidbody.velocity = Vector3.zero;
-            }         
+            }
             //Si estamos fuera del rRalentizado
             else if (distancia > rRalentizado)
                 velMaxima = agente.velocidadMax; // entonces se mueve a velocidad máxima
@@ -72,5 +77,6 @@ namespace UCM.IAV.Movimiento
             // La aceleración intenta conseguir la velocidad objetivo
             return direccion;
         }
+        #endregion
     }
 }
