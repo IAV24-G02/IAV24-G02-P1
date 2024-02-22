@@ -8,7 +8,9 @@
    Autor: Ignacio Ligero
    Contacto: iligero@ucm.es
 */
+using UCM.IAV.Movimiento;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UCM.IAV.Movimiento
 {
@@ -45,44 +47,38 @@ namespace UCM.IAV.Movimiento
         public override Direccion GetDireccion()
         {
             // Consigue la dirección hacia el objetivo
-            Vector3 direccion = new Vector3();
-            direccion = objetivo.transform.position - transform.position;
-            distancia = direccion.magnitude;
-            float velObjetivo;
+            Direccion direccion = new Direccion();
+            direccion.lineal = objetivo.transform.position - transform.position;
+            distancia = direccion.lineal.magnitude;          
 
             // Comprueba si ya ha llegado
             if (distancia < rObjetivo)
-                velObjetivo = 0.0f;
+                velMaxima = 0.0f;
 
             // Si estamos fuera del rRalentizado
             else if (distancia > rRalentizado)
-                velObjetivo = velMaxima; // entonces se mueve a velocidad máxima
+                velMaxima = agente.aceleracionMax; // entonces se mueve a velocidad máxima
             // En otro caso calcula la velocidad en escala
             else
-                velObjetivo = velMaxima * distancia / rRalentizado;
-
-            //Debug.Log("Velocidad objetivo: " + velObjetivo);
+                velMaxima = agente.aceleracionMax * distancia / rRalentizado;         
 
             // La velocidad objetivo combina velocidad y dirección
-            Vector3 vObjetivo = new Vector3();
-            vObjetivo = direccion;
-            vObjetivo.Normalize();
-            vObjetivo *= velObjetivo;
+            direccion.lineal = direccion.lineal * velMaxima;
+            direccion.lineal = direccion.lineal - agente.velocidad;
 
             // La aceleración intenta conseguir la velocidad objetivo
-            Direccion sol = new Direccion();
-            sol.lineal = vObjetivo;
-            sol.lineal /= timeToTarget;
 
+            direccion.lineal = objetivo.transform.position - transform.position;
+            direccion.lineal /= timeToTarget;
             // Comprueba si la aceleración es demasiado alta
-            if (sol.lineal.magnitude > acelMaxima)
+            if (direccion.lineal.magnitude > acelMaxima)
             {
-                sol.lineal.Normalize();
-                sol.lineal *= acelMaxima;
+                direccion.lineal.Normalize();
+                direccion.lineal *= agente.aceleracionMax;
             }
 
-            sol.angular = 0;
-            return sol;
-        }
+            direccion.angular = 0;
+            return direccion;
+        }     
     }
 }
