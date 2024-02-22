@@ -21,6 +21,7 @@ namespace UCM.IAV.Movimiento
 
         public override Direccion GetDireccion()
         {
+            Debug.Log("Meordeo 2");
             Vector3 direccion = new Vector3();
             direccion = objetivo.transform.position - transform.position;
             float distancia = direccion.magnitude;
