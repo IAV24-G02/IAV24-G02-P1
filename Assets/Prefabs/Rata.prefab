@@ -122,9 +122,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peso: 1
   prioridad: 1
-  objetivo: {fileID: 0}
-  tiempoMaximo: 2
-  tiempoMinimo: 1
+  objetivo: {fileID: 4907788568862894593, guid: dba858e7817df634d8619cbb6591a683,
+    type: 3}
+  targetRadius: 0
+  slowRadius: 0
+  timeToTarget: 0.1
+  wanderOffset: 0
+  wanderRadius: 0
+  wanderRate: 0
+  maxAcceleration: 0
 --- !u!114 &-317693632321659350
 MonoBehaviour:
   m_ObjectHideFlags: 0
