@@ -2192,7 +2192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc0c5073ef546042b3ba1dd5b02498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peso: 1
+  peso: 0.5
   prioridad: 1
   objetivo: {fileID: 919132148976998258}
   distancia: 3
@@ -2200,7 +2200,7 @@ MonoBehaviour:
   velMaxima: 2
   rObjetivo: 2
   rRalentizado: 8
---- !u!114 &774483609
+--- !u!114 &774483605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 774483602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04975c86d88a65349a8c27aebc417ff7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d6510102c3021340883d81607cd8884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   peso: 1
@@ -5916,7 +5916,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3861295050334874256, guid: 5ff744207c6a5044ab297c8fc4814fc0,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 774483609}
+      addedObject: {fileID: 774483605}
   m_SourcePrefab: {fileID: 100100000, guid: 5ff744207c6a5044ab297c8fc4814fc0, type: 3}
 --- !u!23 &6021100666521978446
 MeshRenderer:
