@@ -23,9 +23,12 @@ namespace UCM.IAV.Movimiento
         private float radio = 3.0f;
         [SerializeField]
         GameObject rats;
+        [SerializeField]
+        private float distanciaDeteccion = 5.0f;
         #endregion
         #region references
-        Transform myTransform;
+        private Transform myTransform;
+        private LayerMask myObstaclesLayerMask;
         #endregion
 
         /// <summary>
@@ -36,34 +39,47 @@ namespace UCM.IAV.Movimiento
         {
             Direccion direccion = new Direccion();
             Vector3 averagePosition = Vector3.zero;
+            int ratasContadas = 0;
 
-            if (rats.transform.childCount > 0)
+            for (int i = 0; i < rats.transform.childCount; i++)
             {
-                for (int i = 0; i < rats.transform.childCount; i++)
+                Vector3 rataPosition = rats.transform.GetChild(i).position;
+                if (Vector3.Distance(myTransform.position, rataPosition) < radio)
                 {
-                    Vector3 rataPosition = rats.transform.GetChild(i).position;
-                    if (Vector3.Distance(myTransform.position, rataPosition) < radio)
-                    {
-                        averagePosition += rataPosition;
-                    }
-                }
-
-                if (averagePosition != Vector3.zero)
-                {
-                    averagePosition /= rats.transform.childCount;
-
-                    direccion.lineal = myTransform.position - averagePosition;
-                    direccion.lineal.Normalize();
-                    direccion.lineal *= agente.aceleracionMax;
+                    averagePosition += rataPosition;
+                    ratasContadas++;
                 }
             }
 
-            return direccion;
+            // Calcular promedio solo si hay ratas dentro del radio
+            if (ratasContadas > 0)
+            {
+                averagePosition /= ratasContadas;
+                direccion.lineal = myTransform.position - averagePosition;
+                direccion.lineal.Normalize();
+                direccion.lineal *= agente.aceleracionMax;
+            }
+
+            return EvitarObstaculos(direccion);
+        }
+
+        Direccion EvitarObstaculos(Direccion direccionActual)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(myTransform.position, direccionActual.lineal, out hit, distanciaDeteccion, myObstaclesLayerMask))
+            {
+                Vector3 hitPoint = hit.point;
+                Vector3 avoidDirection = hitPoint - myTransform.position;
+                avoidDirection = Vector3.Reflect(avoidDirection, hit.normal);
+                direccionActual.lineal = avoidDirection.normalized * agente.aceleracionMax;
+            }
+            return direccionActual;
         }
 
         private void Start()
         {
             myTransform = GetComponent<Transform>();
+            myObstaclesLayerMask = LayerMask.GetMask("Obstaculos");
         }
     }
 }

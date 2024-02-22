@@ -588,7 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271571435}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,7 +1346,7 @@ GameObject:
   - component: {fileID: 412609108}
   - component: {fileID: 412609107}
   - component: {fileID: 412609106}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Pared
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2217,6 +2217,7 @@ MonoBehaviour:
   objetivo: {fileID: 919132148976998258}
   radio: 3
   rats: {fileID: 870761176}
+  distanciaDeteccion: 5
 --- !u!4 &810378525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1311526244833818872, guid: d484baec5db0a944e81bc9394647fb15,
@@ -3189,7 +3190,7 @@ GameObject:
   - component: {fileID: 1303713795}
   - component: {fileID: 1303713794}
   - component: {fileID: 1303713793}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Pared_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4025,7 +4026,7 @@ GameObject:
   - component: {fileID: 1613933976}
   - component: {fileID: 1613933975}
   - component: {fileID: 1613933974}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Pared_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4600,7 +4601,7 @@ GameObject:
   - component: {fileID: 2027864851}
   - component: {fileID: 2027864850}
   - component: {fileID: 2027864849}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Pared_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
