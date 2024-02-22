@@ -380,9 +380,9 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Sin obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
 | Con obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | _link no disponible_ |
 | **Característica B** | | |
-| Probar que el `Perro` sigue al `Avatar` allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | _link no disponible_ |
-| Probar que el `Perro` se mantiene a cierta distancia del `Avatar`, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el `Perro` es correcta y se combina bien con el seguimiento | _link no disponible_ |
-| Probar que el `Perro` siempre mira hacia el `Avatar`, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | _link no disponible_ |
+| Probar que el `Perro` sigue al `Avatar` allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | [SEGUIMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
+| Probar que el `Perro` se mantiene a cierta distancia del `Avatar`, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el `Perro` es correcta y se combina bien con el seguimiento | [DISTANCIA](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
+| Probar que el `Perro` siempre mira hacia el `Avatar`, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | [ENCARAMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
 | **Característica C** | | |
 | Probar que cambia de comportamiento de persecución al de huida | Tocamos la flauta con el clic derecho (se acercan las `Ratas` y el `Perro` huye) | _link no disponible_ |
 | Probar que durante el comportamiento de huida, se quiten las `Ratas` que lo perjudican y ver que vuelve a perseguir al `Avatar` | Tocamos la flauta con el clic derecho (se acercan las `Ratas` y el `Perro` huye) y dejar de tocar la flauta (el `Perro` vuelve a perseguir) |  _link no disponible_|
