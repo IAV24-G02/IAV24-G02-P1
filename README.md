@@ -410,8 +410,8 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 | ✔ | Característica A: Introducir número de `Ratas` específico | 11-02-2024 |
 | ✔ | Característica B: Seguimiento del `Perro` al `Avatar` | 12-02-2024 |
 | ✔ | Característica C: Huida del `Perro` | 17-02-2024 |
-|  | Característica D: Merodear de las `Ratas` | ..-..-2024 |
-|  | Característica E: Seguimiento y Control de llegada de las `Ratas` | ..-..-2024 |
+| ✔ | Característica D: Merodear de las `Ratas` | 22-02-2024 |
+| ✔ | Característica E: Seguimiento y Control de llegada de las `Ratas` | 22-02-2024 |
 |  |  OTROS  | |
 | ✔ | Movimiento del `Avatar` con el clic izquierdo | 15-02-2024 |
 |  |  OPCIONALES  | |
