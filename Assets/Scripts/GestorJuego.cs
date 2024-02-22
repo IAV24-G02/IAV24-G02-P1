@@ -28,7 +28,7 @@ namespace UCM.IAV.Movimiento
 
         [SerializeField]
         GameObject perro = null;
-        Huir perroHuir = null;
+        HuirDeUnGrupo perroHuir = null;
 
         // textos UI
         [SerializeField]
@@ -88,7 +88,7 @@ namespace UCM.IAV.Movimiento
             Application.targetFrameRate = frameRate;
             numRats = rataGO.transform.childCount;
             ratText.text = numRats.ToString();
-            perroHuir = perro.GetComponent<Huir>();
+            perroHuir = perro.GetComponent<HuirDeUnGrupo>();
         }
 
         // Se llama cuando el juego ha terminado

@@ -16,7 +16,7 @@ namespace UCM.IAV.Movimiento
     /// <summary>
     /// Clase para modelar el comportamiento de HUIR a otro agente
     /// </summary>
-    public class Huir : ComportamientoAgente
+    public class HuirDeUnGrupo : ComportamientoAgente
     {
         #region parameters
         [SerializeField]
@@ -60,20 +60,7 @@ namespace UCM.IAV.Movimiento
                 direccion.lineal *= agente.aceleracionMax;
             }
 
-            return EvitarObstaculos(direccion);
-        }
-
-        Direccion EvitarObstaculos(Direccion direccionActual)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(myTransform.position, direccionActual.lineal, out hit, distanciaDeteccion, myObstaclesLayerMask))
-            {
-                Vector3 hitPoint = hit.point;
-                Vector3 avoidDirection = hitPoint - myTransform.position;
-                avoidDirection = Vector3.Reflect(avoidDirection, hit.normal);
-                direccionActual.lineal = avoidDirection.normalized * agente.aceleracionMax;
-            }
-            return direccionActual;
+            return direccion;
         }
 
         private void Start()
