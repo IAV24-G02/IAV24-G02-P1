@@ -20,7 +20,11 @@ namespace UCM.IAV.Movimiento
     /// </summary>
     public class Llegada : ComportamientoAgente
     {
-        #region references & parameters
+        #region references
+        private Rigidbody rigidbody; // rigidbody del agente
+        #endregion
+
+        #region parameters
         public float distancia; // distancia entre objetivo-agente
         public float acelMaxima; // aceleración máxima alcanzable del agente
         public float velMaxima; // velocidad máxima alcanzable del agente
@@ -32,8 +36,6 @@ namespace UCM.IAV.Movimiento
         private float rRalentizado; // radio en el que empieza a ralentizarse
 
         private float timeToTarget = 0.1f; // tiempo en conseguir la aceleración objetivo
-
-        private Rigidbody rigidbody; // rigidbody del agente
         #endregion
 
         #region methods
