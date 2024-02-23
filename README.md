@@ -426,14 +426,14 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica D** | | |
-| Probar que una vez el `Avatar` deja de tocar la flauta, las `Ratas` comienzan un merodeo errático y desordenado, hasta que el `Avatar` empiece a tocar de nuevo. | Click derecho para activar y desactivar la flauta. | _link no disponible_ |
-| Probar con diferentes valores del wander offset y del wander radius para observar si las `Ratas` merodean de una forma más compacta (como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | _link no disponible_ |
+| Probar que una vez el `Avatar` deja de tocar la flauta, las `Ratas` comienzan un merodeo errático y desordenado, hasta que el `Avatar` empiece a tocar de nuevo. | Click derecho para activar y desactivar la flauta. | [MERODEO RATAS](https://drive.google.com/file/d/12YVfcsz_zGCI7fAsn6iedVJBMV1Mj2Jk/view?usp=sharing) |
+| Probar con diferentes valores del wander offset y del wander radius para observar si las `Ratas` merodean de una forma más compacta (como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | [MERODEO RATAS](https://drive.google.com/file/d/12YVfcsz_zGCI7fAsn6iedVJBMV1Mj2Jk/view?usp=sharing) |
 
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica E** | | |
-| Probar con un número elevado de `Ratas` que cuando se toca la flauta sigan al `Avatar` y eviten agolparse entre ellas | Número de `Ratas`: 50-100 | _link no disponible_ |
-| Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre `Ratas` | Distance: 1 | _link no disponible_ |
+| Probar con un número elevado de `Ratas` que cuando se toca la flauta sigan al `Avatar` y eviten agolparse entre ellas | Número de `Ratas`: 50-100 | [SEGUIMIENTO RATAS](https://drive.google.com/file/d/10wmGn-WAegMN41m6P4NkwZQ_GTk3T_KF/view?usp=sharing) |
+| Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre `Ratas` | Distance: 1 | [SEGUIMIENTO RATAS](https://drive.google.com/file/d/10wmGn-WAegMN41m6P4NkwZQ_GTk3T_KF/view?usp=sharing) |
 
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
