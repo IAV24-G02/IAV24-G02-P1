@@ -114,6 +114,31 @@ class Llegada:
     result.angular = 0
     return result
 ```
+Dado que la implementación mencionada anteriormente no calcula correctamente la ralentización en el radio ralentizado, se han realizado una serie de modificaciones para que el `Perro` vaya reduciendo su velocidad hasta, más o menos, reducir su velocidad hasta un valor muy próximo a cero. Esto se ha hecho de tal manera que una vez se entra en el radio objetivo, se alcanza dicha velocidad. Además, se ha considerado prioritario el encaramiento al objetivo, por lo que se ha prescindido del cálculo del vector dirección del `Jugador` de manera que la llegada siempre es con respecto a la posición de éste, y no a su posible futura posición. Todo lo demás, en esencia, sigue la misma estructura:
+
+```
+	direccion = new SteeringOutput();
+	direccion.lineal = objetivo.transform.position - transform.position;
+	distancia = direccion.lineal.magnitude;
+
+	// Comprueba si ya ha llegado
+	if (distancia < rObjetivo) {
+		return NULL;
+	}
+
+	// Si estamos fuera del rRalentizado
+	else if (distancia > rRalentizado) velMaxima = agente.velocidadMax; // entonces se mueve a velocidad máxima
+
+	// En otro caso calcula la velocidad en escala
+	else velMaxima = agente.velocidadMax * distancia / rRalentizado;
+
+	// La velocidad objetivo combina velocidad y dirección
+	direccion.lineal.Normalize();
+	direccion.lineal *= velMaxima;
+
+	// La aceleración intenta conseguir la velocidad objetivo
+	return direccion;
+```
 
 C. Implementar el movimiento del `Perro` para la huida causado por la cercanía de las `Ratas` respecto al `Perro`.
 
