@@ -384,24 +384,43 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Probar que al introducir un número N de `Ratas` en la caja de texto se produzca en la escena | Introducimos valores no númericos (a, ?, ...), valores numéricos negativos (-1, -1000), valores numéricos cualesquiera en la caja de texto y ENTER | [INTRODUCCIÓN DE NÚMERO DE RATAS](https://drive.google.com/file/d/1Iich5H1EjPYlilxXiF16zgepJSKS96YY/view?usp=sharing) |
 | Sin obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO SIN OBSTÁCULOS](https://drive.google.com/file/d/1NkT8lVXOpOV-Qpl4W41FuUWpdIOUh3XC/view?usp=sharing) |
 | Con obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO CON OBSTÁCULOS](https://drive.google.com/file/d/1z6tSmOhfpuJfAtpY_5xDzrasgokVB4fZ/view?usp=sharing) |
+
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
 | **Característica B** | | |
 | Probar que el `Perro` sigue al `Avatar` allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | [SEGUIMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
 | Probar que el `Perro` se mantiene a cierta distancia del `Avatar`, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el `Perro` es correcta y se combina bien con el seguimiento | [DISTANCIA](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
 | Probar que el `Perro` siempre mira hacia el `Avatar`, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | [ENCARAMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
+
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
 | **Característica C** | | |
 | Probar que cambia de comportamiento de persecución al de huida cuando hay ratas cerca | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye | [HUIDA CON Y SIN FLAUTA](https://drive.google.com/file/d/1R25oITF4c8R7n7mBcyqyAHWfpfdcdY7h/view?usp=sharing) |
 | Probar que a partir de radios diferentes alrededor del `Perro`, el `Perro` huya | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye, cambiamos en el inspector el radio (10, 2, etc) | [HUIDA CON DIFERENTES RADIOS](https://drive.google.com/file/d/18_qzVoEuL2JjhBBjIhkT-HcNnG5QxrYP/view?usp=sharing) |
+
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
 | **Característica D** | | |
 | Probar que una vez el `Avatar` deja de tocar la flauta, las `Ratas` comienzan un merodeo errático y desordenado, hasta que el `Avatar` empiece a tocar de nuevo. | Click derecho para activar y desactivar la flauta. | _link no disponible_ |
 | Probar con diferentes valores del wander offset y del wander radius para observar si las `Ratas` merodean de una forma más compacta (como grupo) o menos. | Introducir en el wander radius y offset valores más pequeños y más grandes.  | _link no disponible_ |
+
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
 | **Característica E** | | |
 | Probar con un número elevado de `Ratas` que cuando se toca la flauta sigan al `Avatar` y eviten agolparse entre ellas | Número de `Ratas`: 50-100 | _link no disponible_ |
 | Probar con diferentes distancias en búsqueda de los valores más ajustados para la Separación entre `Ratas` | Distance: 1 | _link no disponible_ |
+
+| Pruebas | Métricas | Links |
+|:-:|:-:|:-:|
+| **Ampliación: Distracción de las ratas con trozos de queso** | | |
+| Probar que al colocar trozos de queso, las `Ratas` prioricen el queso | Clic central de la ruedecilla para instanciar quesos por la escena y comprobar que se comen los quesos | [DISTRACCIÓN](https://drive.google.com/file/d/1CzMh6A0Tq622NyXDn-ag-uc9CvRX7_at/view?usp=drive_link) |
+| Probar que al hipnotizar a las `Ratas`, al colocar trozos de queso, las `Ratas` prioricen el queso | Clic derecho para hipnotizar a las `Ratas` según el radio, colocar trozos de queso y comprobar que priorizan antes el comerse el queso | [DISTRACCIÓN BAJO HIPNOSIS](https://drive.google.com/file/d/1ljp2CRiJmaOEeBa4_k11p8pA-LdGRv_r/view?usp=drive_link) |
 
 ## Ampliaciones
 
 Se ha realizado la ampliación de los quesos. Consiste en que el `Avatar` puede instanciar hasta un número concreto de quesos los cuáles hacen que las `Ratas`, cuando están a una determinada distancia de algún queso, van a por él, y una vez llegan se lo "come". El pseudocódigo (parecido al de HuirDeUnGrupo) es el siguiente:
 
+```
 class SeguirQueso:
     character: Static
     # List of targets.
@@ -454,16 +473,14 @@ Las tareas se han realizado y el esfuerzo ha sido repartido entre los autores. O
 | ✔ | Característica C: Huida del `Perro` | 17-02-2024 |
 | ✔ | Característica D: Merodear de las `Ratas` | 22-02-2024 |
 | ✔ | Característica E: Seguimiento y Control de llegada de las `Ratas` | 22-02-2024 |
-|  |  OTROS  | |
+|  | **OTROS** | |
 | ✔ | Movimiento del `Avatar` con el clic izquierdo | 15-02-2024 |
-|  |  OPCIONALES  | |
-|  | Generador pseudoaleatorio | ..-..-2024 |
-|  | Competición de flautistas | ..-..-2024 |
+|  |  **OPCIONALES**  | |
+| ❌ | Generador pseudoaleatorio | ..-..-2024 |
+| ❌ | Competición de flautistas | ..-..-2024 |
 | ✔ | Distracción de las `Ratas` con trozos de queso | 22-02-2024 |
-|  | Percepción del `Perro` mediante la vista | ..-..-2024 |
-|  | Evasión de los obstáculos mediante la vista | ..-..-2024 |
-|  | Menú | ..-..-2024 |
-|  | HUD | ..-..-2024 |
+| ❌ | Percepción del `Perro` mediante la vista | ..-..-2024 |
+| ❌ | Evasión de los obstáculos mediante la vista | ..-..-2024 |
 
 ## Licencia
 
