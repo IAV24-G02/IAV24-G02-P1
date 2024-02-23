@@ -380,10 +380,10 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica A** | | |
-| Probar que el `Avatar` toque la flauta con el clic derecho | Clic derecho, ver que se reproduce música y sale un radio | [TOQUE DE FLAUTA CON CLIC DERECHO](https://drive.google.com/file/d/1basaecUMDw61O9hoeGrmZZkv_tQsOrup/view?usp=sharing) |
-| Probar que al introducir un número N de `Ratas` en la caja de texto se produzca en la escena | Introducimos valores no númericos (a, ?, ...), valores numéricos negativos (-1, -1000), valores numéricos cualesquiera en la caja de texto y ENTER | [INTRODUCCIÓN DE NÚMERO DE RATAS](https://drive.google.com/file/d/1Iich5H1EjPYlilxXiF16zgepJSKS96YY/view?usp=sharing) |
-| Sin obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO SIN OBSTÁCULOS](https://drive.google.com/file/d/1NkT8lVXOpOV-Qpl4W41FuUWpdIOUh3XC/view?usp=sharing) |
-| Con obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO CON OBSTÁCULOS](https://drive.google.com/file/d/1z6tSmOhfpuJfAtpY_5xDzrasgokVB4fZ/view?usp=sharing) |
+| Probar que el `Avatar` toque la flauta con el clic derecho | Clic derecho, ver que se reproduce música y sale un radio | [TOQUE DE FLAUTA CON CLIC DERECHO](https://drive.google.com/file/d/1wtNZyTH2Vd2Wxqmm9hhu5viC3iaaK3X_/view?usp=sharing) |
+| Probar que al introducir un número N de `Ratas` en la caja de texto se produzca en la escena | Introducimos valores no númericos (a, ?, ...), valores numéricos negativos (-1, -1000), valores numéricos cualesquiera en la caja de texto y ENTER | [INTRODUCCIÓN DE NÚMERO DE RATAS](https://drive.google.com/file/d/1dT-MtvIMNq-FkOYpwcvijaHvQyvne1eL/view?usp=sharing) |
+| Sin obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Desactivamos los obstáculos, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO SIN OBSTÁCULOS](https://drive.google.com/file/d/1qJrDY9aM7EKWAD7301jUQS_P8K9jjSly/view?usp=sharing) |
+| Con obstáculos, probar que el movimiento del `Avatar` funcione con el clic izquierdo | Con obstáculos activados, clic izquierdo y ver que se mueve hacia el punto especificado | [MOVIMIENTO CON OBSTÁCULOS](https://drive.google.com/file/d/10ekdEY150dzNn8JcTRyJibMzeEl76jU0/view?usp=sharing) |
 
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
@@ -395,8 +395,8 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica C** | | |
-| Probar que cambia de comportamiento de persecución al de huida cuando hay ratas cerca | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye | [HUIDA CON Y SIN FLAUTA](https://drive.google.com/file/d/1R25oITF4c8R7n7mBcyqyAHWfpfdcdY7h/view?usp=sharing) |
-| Probar que a partir de radios diferentes alrededor del `Perro`, el `Perro` huya | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye, cambiamos en el inspector el radio (10, 2, etc) | [HUIDA CON DIFERENTES RADIOS](https://drive.google.com/file/d/18_qzVoEuL2JjhBBjIhkT-HcNnG5QxrYP/view?usp=sharing) |
+| Probar que cambia de comportamiento de persecución al de huida cuando hay ratas cerca | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye | [HUIDA CON Y SIN FLAUTA](https://drive.google.com/file/d/1upju0EDUceFrtNAIq9qbvVlrvrdKYDX9/view?usp=sharing) |
+| Probar que a partir de radios diferentes alrededor del `Perro`, el `Perro` huya | Tocamos la flauta con el clic derecho para que se acerquen las `Ratas` (si hace falta) y el `Perro` huye, cambiamos en el inspector el radio (10, 2, etc) | [HUIDA CON DIFERENTES RADIOS](https://drive.google.com/file/d/1oSaDHPWehSwfZ8LRVsKaHrk4DVjpTSZj/view?usp=sharing) |
 
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
@@ -413,8 +413,8 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Ampliación: Distracción de las ratas con trozos de queso** | | |
-| Probar que al colocar trozos de queso, las `Ratas` prioricen el queso | Clic central de la ruedecilla para instanciar quesos por la escena y comprobar que se comen los quesos | [DISTRACCIÓN](https://drive.google.com/file/d/1CzMh6A0Tq622NyXDn-ag-uc9CvRX7_at/view?usp=drive_link) |
-| Probar que al hipnotizar a las `Ratas`, al colocar trozos de queso, las `Ratas` prioricen el queso | Clic derecho para hipnotizar a las `Ratas` según el radio, colocar trozos de queso y comprobar que priorizan antes el comerse el queso | [DISTRACCIÓN BAJO HIPNOSIS](https://drive.google.com/file/d/1ljp2CRiJmaOEeBa4_k11p8pA-LdGRv_r/view?usp=drive_link) |
+| Probar que al colocar trozos de queso, las `Ratas` prioricen el queso | Clic central de la ruedecilla para instanciar quesos por la escena y comprobar que se comen los quesos | [DISTRACCIÓN](https://drive.google.com/file/d/1LyZEmpfYOdOKf3DGr2UsFkEYSuP1zvHx/view?usp=sharing) |
+| Probar que al hipnotizar a las `Ratas`, al colocar trozos de queso, las `Ratas` prioricen el queso | Clic derecho para hipnotizar a las `Ratas` según el radio, colocar trozos de queso y comprobar que priorizan antes el comerse el queso | [DISTRACCIÓN BAJO HIPNOSIS](https://drive.google.com/file/d/1VeYOfp5VoAJwmuS3aENc2vSMgTIAwD5D/view?usp=sharing) |
 
 ## Ampliaciones
 
