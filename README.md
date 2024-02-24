@@ -413,9 +413,9 @@ Queremos comprobar la distancia entre el _character_ (una Rata), y los _targets_
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
 | **Característica B** | | |
-| Probar que el `Perro` sigue al `Avatar` allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | [SEGUIMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
-| Probar que el `Perro` se mantiene a cierta distancia del `Avatar`, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el `Perro` es correcta y se combina bien con el seguimiento | [DISTANCIA](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
-| Probar que el `Perro` siempre mira hacia el `Avatar`, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | [ENCARAMIENTO](https://drive.google.com/file/d/1OpLqoF0-Ae68AyfDMGRKxcHQwCw_n7Hs/view?usp=drive_link) |
+| Probar que el `Perro` sigue al `Avatar` allá a donde vaya | Vamos caminando por el terreno y se va a asegurando que la implementación esté correcta | [SEGUIMIENTO](https://drive.google.com/file/d/1dXk7IiDs2inTe9rr1fkkAgSk0eDNaH1c/view?usp=drive_link) |
+| Probar que el `Perro` se mantiene a cierta distancia del `Avatar`, de manera que no sea molesto para éste | Asegurarse de que la distancia adoptada por el `Perro` es correcta y se combina bien con el seguimiento | [DISTANCIA](https://drive.google.com/file/d/1dXk7IiDs2inTe9rr1fkkAgSk0eDNaH1c/view?usp=drive_link) |
+| Probar que el `Perro` siempre mira hacia el `Avatar`, independientemente de su posición en el espacio bidimensional | Asegurarse de que esta regla se cumple | [ENCARAMIENTO](https://drive.google.com/file/d/1dXk7IiDs2inTe9rr1fkkAgSk0eDNaH1c/view?usp=drive_link) |
 
 | Pruebas | Métricas | Links |
 |:-:|:-:|:-:|
