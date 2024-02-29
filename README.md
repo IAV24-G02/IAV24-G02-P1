@@ -1,4 +1,4 @@
-# IAV - Práctica 1
+# IAV - Práctica 1: Movimiento
 
 ## Autores
 - Yi (Laura) Wang Qiu [GitHub](https://github.com/LauraWangQiu)
